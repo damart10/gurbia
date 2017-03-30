@@ -15,7 +15,7 @@ export default class Button extends Component {
       <TouchableOpacity
         style={styles.buttonLogin}
         activeOpacity={0.7}
-        onPress={this.props.func}>
+        onPress={this.props.onpress}>
 
         <Text style={styles.buttonText}>{this.props.text}</Text>
       </TouchableOpacity>

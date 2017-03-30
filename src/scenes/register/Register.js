@@ -19,11 +19,9 @@ export default class Register extends Component {
   render() {
     return(
       <View style={styles.formContainer}>
-        <InputText type='default' placeholder='FIRST NAME' secure={false} />
-        <InputText type='default' placeholder='LAST NAME' secure={false} />
-        <InputText type='default' placeholder='USERNAME' secure={false} />
-        <InputText type='default' placeholder='PASSWORD' secure={true} />
+        <InputText type='default' placeholder='NAME' secure={false} />
         <InputText type='default' placeholder='EMAIL' secure={false} />
+        <InputText type='default' placeholder='PASSWORD' secure={true} />
         <Button func={() => this.navigate('Home')} text='REGISTER' />
       </View>
     )

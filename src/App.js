@@ -9,11 +9,6 @@ import Login from './scenes/login/Login'
 import Register from './scenes/register/Register'
 import Home from './scenes/home/Home'
 
-@connect( (store) => {
-  return {
-    userFetched: store.user.fetched
-  }
-})
 export default class App extends Component {
   constructor( props ) {
     super( props )
@@ -51,3 +46,5 @@ export default class App extends Component {
     )
   }
 }
+
+connect( store => ({ userFetched: store.user.fetched }), {})

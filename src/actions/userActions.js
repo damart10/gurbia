@@ -1,25 +1,36 @@
-import Firebase from 'firebase'
+import * as firebase from 'firebase'
 
-const db = new Firebase('https://gurbia-1330f.firebaseio.com/');
+const app = firebase.initializeApp({
+  apiKey: "AIzaSyB6hLC91vjHm5rAgV5ootxr4-Uv1P2N_4E",
+  authDomain: "gurbia-1330f.firebaseapp.com"
+})
 
-export function getUser() {
-  return dispatch => {
-    db.on('value', snapshot => {
-      dispatch({
-        type: 'GET_USER',
-        payload: snapshot.val()
-      });
-    });
-  };return {
-    type: 'GET_USER',
-    payload: data
-  }
+export function userLogin({ email, password }) {
+  app.auth().signInWithEmailAndPassword(email, password)
+  .then( (res) => {
+    dispatch({
+      type: 'USER_LOGIN_FULFILLED',
+      payload: res,
+    })
+  }).catch( (error) => {
+    dispatch({
+      type: 'USER_LOGIN_REJECTED',
+      payload: error,
+    })
+  })
 }
 
-export function addUser(data) {
-  return dispatch => db.push(data);
-}
-
-export function deleteUser(key) {
-  return dispatch => db.child(key).remove();
+export function userAdd({ email, password }) {
+  app.auth().createUserWithEmailAndPassword(email, password)
+  .then( (res) => {
+    dispatch({
+      type: 'USER_CREATE_FULFILLED',
+      payload: res,
+    })
+  }).catch( (error) => {
+    dispatch({
+      type: 'USER_CREATE_REJECTED',
+      payload: error,
+    })
+  })
 }

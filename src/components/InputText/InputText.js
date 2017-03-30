@@ -22,6 +22,7 @@ export default class InputText extends Component {
               underlineColorAndroid="#e67e22"
               secureTextEntry={this.props.secure}
               style={styles.inputStyle}
+              onChange={this.props.onchange}
             />
       </KeyboardAvoidingView>
     )
