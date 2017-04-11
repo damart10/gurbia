@@ -9,6 +9,8 @@ import { connect } from 'react-redux'
 
 import Button from '../../components/Button/Button'
 import InputText from '../../components/InputText/InputText'
+import { Actions } from '../../actions'
+
 
 class Login extends Component {
   constructor(props) {
