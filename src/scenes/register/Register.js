@@ -25,21 +25,31 @@ export default class Register extends Component {
       return re.test(email);
   };
 
+  validatePassword(password){
+    if(password.length > 7){return true}
+    else{return false}
+  }
+
   handleFormSubmit() {
     try {
       if(this.validateEmail(this.state.email)){
-        Database.createUser(
-          this.state.firstname,
-          this.state.lastname,
-          this.state.email,
-          this.state.password
-        );
-        this.navigate('Home');
+        if(this.validatePassword(this.state.password)){
+          Database.createUser(
+            this.state.firstname,
+            this.state.lastname,
+            this.state.email,
+            this.state.password
+          );
+          this.navigate('Home');
+        }
+        else{
+          alert('La contraseña debe tener minimo 8 caracteres')
+        }
       }
-      else {
+      else{
         alert('Malformed email');
       }
-    } catch(error) {
+  }catch(error) {
       console.log('Error: ', error);
     }
   }
@@ -85,4 +95,3 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff'
   }
 })
-
