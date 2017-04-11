@@ -22,10 +22,20 @@ export default class Login extends Component {
     this.props.navigator.push({ id });
   }
 
+   validateEmail = (email) => {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+  };
+
   handleFormSubmit() {
     try {
-      Database.loginUser(this.state.email, this.state.password);
-      this.navigate('Home');
+      if(this.validateEmail(this.state.email)) {
+        Database.loginUser(this.state.email, this.state.password);
+        this.navigate('Home');
+      }
+      else {
+        alert('Malformed email');
+      }
     } catch(error) {
       console.log('Error: ', error);
     }
