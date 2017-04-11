@@ -44,7 +44,7 @@ class Login extends Component {
     return(
       <View style={styles.formContainer}>
         <Image
-          source={require('../../resources/rsz_logo_-_copy.png')}
+          source={require('../../resources/logo.png')}
           style={styles.imagen}
         />
         <InputText
