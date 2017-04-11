@@ -20,6 +20,20 @@ export function userLogin(email, password) {
   }
 }
 
-export function userAdd({ email, password }) {
-
+export function userAdd(email, password, firstname, lastname) {
+  return (dispatch) => {
+    axios.post('/', {email, password, firstname, lastname})
+      .then((response) => {
+        dispatch({
+          type: 'USER_REGISTER_FULFILLED',
+          payload: response
+        })
+      })
+      .catch((error) => {
+        dispatch({
+          type: 'USER_REGISTER_REJECTED',
+          payload: error
+        })
+      })
+  }
 }
