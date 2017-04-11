@@ -12,11 +12,11 @@ import Button from '../../components/Button/Button'
 import { Actions } from '../../actions'
 
 class Register extends Component {
-  constructor( props ) {
-    super( props )
+  constructor(props) {
+    super(props)
 
     this.navigate = this.navigate.bind(this);
-    this.handleFormSubmit = this.handleFormSubmit.bind(this)
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
   navigate( id ) {
@@ -25,8 +25,11 @@ class Register extends Component {
 
   handleFormSubmit() {
     try {
-      console.log(this.state);
-      this.props.userAdd(this.state.email, this.state.password, this.state.firstname, this.state.lastname);
+      this.props.userAdd(
+        this.state.email,
+        this.state.password,
+        this.state.firstname,
+        this.state.lastname);
     } catch(error) {
       console.log('Error', error);
     }
@@ -36,28 +39,28 @@ class Register extends Component {
     return(
       <View style={styles.formContainer}>
         <InputText
-          onchange = {(firstname) => this.setState({firstname})} 
-          type='default' 
-          placeholder='FIRSTNAME' 
-          secure={false} 
+          onchange = {(firstname) => this.setState({ firstname })}
+          type='default'
+          placeholder='FIRSTNAME'
+          secure={false}
           />
         <InputText
-          onchange = {(lastname) => this.setState({lastname})}           
-          type='default' 
-          placeholder='LASTNAME' 
-          secure={false} 
+          onchange = {(lastname) => this.setState({ lastname })}
+          type='default'
+          placeholder='LASTNAME'
+          secure={false}
           />
         <InputText
-          onchange = {(email) => this.setState({email})} 
-          type='default' 
-          placeholder='EMAIL' 
-          secure={false} 
+          onchange = {(email) => this.setState({ email })}
+          type='default'
+          placeholder='EMAIL'
+          secure={false}
           />
         <InputText
-          onchange = {(password) => this.setState({password})} 
-          type='default' 
-          placeholder='PASSWORD' 
-          secure={true} 
+          onchange = {(password) => this.setState({ password })}
+          type='default'
+          placeholder='PASSWORD'
+          secure={true}
           />
         <Button func={() => this.navigate('Home')} text='REGISTER' />
       </View>
