@@ -61,7 +61,7 @@ export default class Register extends Component {
           placeholder='PASSWORD'
           secure={true}
           />
-        <Button func={() => this.navigate('Home')} text='REGISTER' />
+        <Button onpress={() => this.handleFormSubmit()} text='REGISTER' />
       </View>
     )
   }

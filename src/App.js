@@ -9,7 +9,7 @@ import Login from './scenes/login/Login'
 import Register from './scenes/register/Register'
 import Home from './scenes/home/Home'
 
-class App extends Component {
+export default class App extends Component {
   constructor( props ) {
     super( props )
 

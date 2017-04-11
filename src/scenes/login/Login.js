@@ -10,7 +10,7 @@ import Database from '../../database/database'
 import Button from '../../components/Button/Button'
 import InputText from '../../components/InputText/InputText'
 
-class Login extends Component {
+export default class Login extends Component {
   constructor(props) {
     super(props)
 
