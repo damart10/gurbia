@@ -23,7 +23,20 @@ export default function(state={
           fetched: true,
           user: action.payload,
         };
-    }
 
+      case "USER_REGISTER_FULFILLED":
+      return {
+          ...state,
+          fetched: true,
+          user: action.payload,
+        };
+
+      case "USER_REGISTER_REJECTED":
+        return {
+          ...state,
+          error: action.payload.error ,
+          errorMessage: action.payload.message
+        };
+    }
     return state
 }
