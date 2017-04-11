@@ -43,6 +43,10 @@ class Login extends Component {
   render() {
     return(
       <View style={styles.formContainer}>
+        <Image
+          source={require('../../resources/rsz_logo_-_copy.png')}
+          style={styles.imagen}
+        />
         <InputText
           onchange={(email) => this.setState({ email })}
           type='default'
@@ -63,13 +67,20 @@ class Login extends Component {
 }
 
 const styles = StyleSheet.create({
+  imagen: {
+    alignSelf: 'center',
+    justifyContent: 'center',
+    marginBottom: 50
+  },
   formContainer: {
-    flex: 1,
+    flex: 3,
     justifyContent: 'center',
     alignItems: 'stretch',
     padding: 40,
     backgroundColor: '#fff'
   }
+
+
 })
 
 function mapDispatchToProps(dispatch) {
@@ -81,5 +92,7 @@ function mapStateToProps(state) {
     fetchingState: state.user.fetched
   }
 }
+
+export default connect(mapStateToProps)(Login)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
