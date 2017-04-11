@@ -1,14 +1,14 @@
 import axios from 'axios'
 
-const url = 'http://localhost:3000/api/user'
+axios.defaults.baseURL = 'http://192.168.122.1:3000/api/user';
 
 export function userLogin(email, password) {
-  return dispatch => {
-    axios.post(url, { email, password })
+  return (dispatch) => {
+    axios.post('/', { email, password })
       .then((response) => {
         dispatch({
           type: 'USER_LOGIN_FULFILLED',
-          payload: res
+          payload: response
         })
       })
       .catch((error) => {
@@ -21,16 +21,5 @@ export function userLogin(email, password) {
 }
 
 export function userAdd({ email, password }) {
-  app.auth().createUserWithEmailAndPassword(email, password)
-  .then( (res) => {
-    dispatch({
-      type: 'USER_CREATE_FULFILLED',
-      payload: res,
-    })
-  }).catch( (error) => {
-    dispatch({
-      type: 'USER_CREATE_REJECTED',
-      payload: error,
-    })
-  })
+
 }

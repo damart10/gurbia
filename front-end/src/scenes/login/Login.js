@@ -11,11 +11,11 @@ import { connect } from 'react-redux'
 import Button from '../../components/Button/Button'
 import InputText from '../../components/InputText/InputText'
 
-import * as userActions from '../../actions/userActions'
+import { Actions } from '../../actions'
 
 class Login extends Component {
-  constructor( props ) {
-    super( props)
+  constructor(props) {
+    super(props)
 
     this.navigate = this.navigate.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
@@ -27,15 +27,16 @@ class Login extends Component {
 
   handleFormSubmit() {
     try {
-      console.log(this.state.email);
-      console.log(this.state.password);
-      userActions.userLogin(this.state.email, this.state.password);
-
-      if(this.state.fetched) {
-        this.props.navigator.push({ id: 'Home' });
-      }
+      console.log(this.state);
+      this.props.userLogin(this.state.email, this.state.password);
     } catch(error) {
       console.log('Error', error);
+    }
+  }
+
+  componentWillMount() {
+    if(this.props.fetchingState) {
+      this.props.navigator.push({ id: 'Home' });
     }
   }
 
@@ -71,10 +72,14 @@ const styles = StyleSheet.create({
   }
 })
 
-const mapStateToProps = state => {
-  return {
-    user: state.user
-  };
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(Actions, dispatch);
 }
 
-export default connect(mapStateToProps)(Login)
+function mapStateToProps(state) {
+  return {
+    fetchingState: state.user.fetched
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
