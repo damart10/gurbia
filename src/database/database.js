@@ -4,8 +4,13 @@ export default class Database {
 
   static createUser(firstname, lastname, email, password) {
     try{
-      firebase.auth().createUserWithEmailAndPassword(email, password);
-
+      firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then(res => {
+          firebase.database().ref('users/' + res.uid).set({
+            username: (firstname + ' ' + lastname),
+            email 
+          });
+        });
       console.log('Success');
     } catch(error) {
       console.error(error);
