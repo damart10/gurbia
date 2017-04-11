@@ -5,13 +5,10 @@ import {
   Image,
   StyleSheet
 } from 'react-native'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import Button from '../../components/Button/Button'
 import InputText from '../../components/InputText/InputText'
-
-import { Actions } from '../../actions'
 
 class Login extends Component {
   constructor(props) {
@@ -27,16 +24,10 @@ class Login extends Component {
 
   handleFormSubmit() {
     try {
-      console.log(this.state);
       this.props.userLogin(this.state.email, this.state.password);
+      this.navigate('Home');
     } catch(error) {
       console.log('Error', error);
-    }
-  }
-
-  componentWillMount() {
-    if(this.props.fetchingState) {
-      this.props.navigator.push({ id: 'Home' });
     }
   }
 
@@ -83,14 +74,10 @@ const styles = StyleSheet.create({
 
 })
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(Actions, dispatch);
-}
-
 function mapStateToProps(state) {
   return {
     fetchingState: state.user.fetched
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps)(Login);

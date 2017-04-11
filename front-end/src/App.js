@@ -4,18 +4,23 @@ import {
   Text
 } from 'react-native'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 import Login from './scenes/login/Login'
 import Register from './scenes/register/Register'
 import Home from './scenes/home/Home'
 
-export default class App extends Component {
+import { Actions } from './actions'
+
+class App extends Component {
   constructor( props ) {
     super( props )
 
     this.renderScene = this.renderScene.bind(this);
+  }
 
-    if(this.props.userFetched === true) {
+  componentWillMount() {
+    if(this.props.fetchingState === true) {
       this.props.initialRoute = {id : 'Home'}
     }
   }
@@ -24,13 +29,13 @@ export default class App extends Component {
     _navigator = navigator;
     switch( route.id ) {
       case 'Login':
-        return( <Login navigator={_navigator} />);
+        return( <Login navigator={_navigator} {...this.props}/>);
         break;
       case 'Register':
-        return( <Register navigator={_navigator} />);
+        return( <Register navigator={_navigator} {...this.props}/>);
         break;
       case 'Home':
-        return( <Home navigator={_navigator} />);
+        return( <Home navigator={_navigator} {...this.props}/>);
         break;
       default:
         return ( <Text>SOMETHING WENT WRONG ${route}</Text> );
@@ -47,4 +52,14 @@ export default class App extends Component {
   }
 }
 
-connect( store => ({ userFetched: store.user.fetched }), {})
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(Actions, dispatch);
+}
+
+function mapStateToProps(state) {
+  return {
+    fetchingState: state.user.fetched
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
