@@ -4,6 +4,11 @@ import {
   Text,
   BackAndroid
 } from 'react-native'
+import Drawer from 'react-native-drawer'
+
+import Sidebar from './../../components/Sidebar/Sidebar'
+import Navbar from './../../components/Navbar/Navbar'
+import Button from './../../components/Button/Button'
 
 export default class Home extends Component {
   constructor( props ) {
@@ -11,10 +16,26 @@ export default class Home extends Component {
   }
 
   render() {
-    return(
-      <View>
-        <Text> HOME COMPONENT </Text>
-      </View>
+    closeDrawer = () => {
+      this._drawer.close()
+    };
+    openDrawer = () => {
+      this._drawer.open()
+    };
+    return (
+      <Drawer
+        type='overlay'
+        ref={(ref) => this._drawer = ref}
+        tapToClose={true}
+        openDrawerOffset={0.3}
+        content={<Sidebar navigator={this.props.navigator}/>}
+        >
+        <View>
+          <Navbar />
+          <Text> BODY HOME COMPONENT </Text>
+          <Button onpress={() => openDrawer()} text='OPEN DRAWER' />
+        </View>
+      </Drawer>
     )
   }
 }
