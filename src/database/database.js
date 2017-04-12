@@ -8,7 +8,7 @@ export default class Database {
         .then(res => {
           firebase.database().ref('users/' + res.uid).set({
             username: (firstname + ' ' + lastname),
-            email 
+            email
           });
         });
       console.log('Success');
@@ -20,8 +20,14 @@ export default class Database {
   static loginUser(email, password) {
     try{
       firebase.auth().signInWithEmailAndPassword(email, password);
+      this.usuario = firebase.auth().currentUser;
     } catch(error) {
       console.error(error);
     }
   }
+
+  static getCurrentUser(){
+    return(this.usuario)
+  }
+
 }

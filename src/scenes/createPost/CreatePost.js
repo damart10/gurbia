@@ -12,7 +12,6 @@ import Button from '../../components/Button/Button'
 import InputText from '../../components/InputText/InputText'
 
 
-
 export default class CreatePost extends Component {
   constructor(props) {
     super(props)
