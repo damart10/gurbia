@@ -10,6 +10,7 @@ import {
 import Database from '../../database/database'
 import Button from '../../components/Button/Button'
 import InputText from '../../components/InputText/InputText'
+import ImagePicker from 'react-native-image-crop-picker'
 
 
 export default class CreatePost extends Component {
@@ -25,12 +26,23 @@ export default class CreatePost extends Component {
   }
 
   handleFormSubmit() {
-    try {
+  try {
       console.log('Holi');
     } catch(error) {
       console.log('Error: ', error);
     }
   }
+  abrir(){
+    ImagePicker.openPicker({
+      width: 300,
+      height: 400,
+      cropping: true
+      }).then(image => {
+      console.log(image);
+    });
+  }
+
+
 
   render() {
     return(
@@ -71,6 +83,7 @@ export default class CreatePost extends Component {
           />
         </View>
         <Button onpress={() => this.handleFormSubmit()} text='SUBMIT' />
+        <Button onpress={() => this.abrir()} text='Adjuntar imagen' />
       </View>
     )
   }
