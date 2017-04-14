@@ -10,31 +10,57 @@ import {
 import Database from '../../database/database'
 import Button from '../../components/Button/Button'
 import InputText from '../../components/InputText/InputText'
+import ImagePicker from 'react-native-image-crop-picker'
 
 
 export default class CreatePost extends Component {
   constructor(props) {
     super(props)
-
     this.navigate = this.navigate.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
+    this.state = {imagePath: ''}
   }
 
+
+  componentWillMount(){
+    this.setState({imagePath: 'http://thugify.com/wp-content/uploads/2016/08/placeholder.jpg'})
+  }
   navigate( id ) {
     this.props.navigator.push({ id });
   }
 
   handleFormSubmit() {
-    try {
+  try {
       console.log('Holi');
     } catch(error) {
       console.log('Error: ', error);
     }
   }
 
+  openImage(){
+      ImagePicker.openPicker({
+        width: 200,
+        height: 200,
+        cropping: true
+        }).then(image => {
+        console.log(image.path);
+
+        this.setState({ imagePath: image.path })
+      }).catch(function (e) {
+        console.log('El usuario no eligio foto',e)
+      });
+    }
+
+    validateField(field){
+      if(field.length > 0){return true}
+      else{return false}
+    }
+
+
   render() {
     return(
       <View style={styles.formContainer}>
+        <Image source={{uri:this.state.imagePath}} style={styles.uploadAvatar}/>
         <InputText
           onchange={(title) => this.setState({ title })}
           type='default'
@@ -70,6 +96,7 @@ export default class CreatePost extends Component {
             secure={false}
           />
         </View>
+        <Button onpress={() => this.openImage()} text='UPLOAD IMAGE' />
         <Button onpress={() => this.handleFormSubmit()} text='SUBMIT' />
       </View>
     )
@@ -84,5 +111,12 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     padding: 40,
     backgroundColor: '#fff'
+  },
+  uploadAvatar:{
+    height: 200,
+    width: 200,
+    alignSelf: 'center',
+    marginBottom: 30
+
   }
 })
