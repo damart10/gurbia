@@ -31,6 +31,14 @@ export default class CreatePost extends Component {
 
   handleFormSubmit() {
   try {
+      Database.writePost(
+        this.state.imagePath,
+        this.state.title,
+        this.state.description,
+        this.state.location,
+        this.state.portions,
+        this.state.price
+      );
       console.log('Holi');
     } catch(error) {
       console.log('Error: ', error);
@@ -68,7 +76,7 @@ export default class CreatePost extends Component {
           secure={false}
         />
         <TextInput
-          onchange={(description) => this.setState({ description })}
+          onChangeText={(description) => this.setState({ description })}
           type='default'
           placeholder='DESCRIPTION'
           multiline={true}

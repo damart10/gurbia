@@ -35,7 +35,7 @@ export default class Login extends Component {
     try {
       if(this.validateEmail(this.state.email)) {
         Database.loginUser(this.state.email, this.state.password);
-        this.navigate('Home');
+        this.navigate('CreatePost');
       }
       else {
         alert('Malformed email');
@@ -65,7 +65,7 @@ export default class Login extends Component {
           secure={true}
         />
         <Button onpress={() => this.handleFormSubmit()} text='LOGIN' />
-        <Button onpress={() => this.navigate('Register')} text='REGISTER' />
+        <Button onpress={() => this.navigate('Register')} text='REGISTER'/>
       </View>
     )
   }
