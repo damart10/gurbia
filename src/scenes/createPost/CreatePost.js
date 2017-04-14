@@ -31,15 +31,22 @@ export default class CreatePost extends Component {
 
   handleFormSubmit() {
   try {
-      Database.writePost(
-        this.state.imagePath,
-        this.state.title,
-        this.state.description,
-        this.state.location,
-        this.state.portions,
-        this.state.price
-      );
-      console.log('Holi');
+      if(this.state.imagePath != 'http://thugify.com/wp-content/uploads/2016/08/placeholder.jpg'){
+        Database.writePost(
+          this.state.imagePath,
+          this.state.title,
+          this.state.description,
+          this.state.location,
+          this.state.portions,
+          this.state.price
+        );
+        this.navigate('Home')
+        console.log('Holi');
+      }
+      else{
+        alert('Por favor adjunte una imagen')
+      }
+
     } catch(error) {
       console.log('Error: ', error);
     }
