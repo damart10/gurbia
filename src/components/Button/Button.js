@@ -25,7 +25,7 @@ export default class Button extends Component {
 
 const styles = StyleSheet.create({
   buttonLogin: {
-    backgroundColor: '#e74c3c',
+    backgroundColor: '#F44336',
     height: 40,
     justifyContent: 'center',
     marginLeft: 50,
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     textAlign: 'center',
-    color: '#FFF',
+    color: '#FFFFFF',
     fontWeight: '600'
   }
 })

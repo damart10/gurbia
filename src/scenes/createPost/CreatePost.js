@@ -48,7 +48,7 @@ export default class CreatePost extends Component {
           multiline={true}
           maxLength={140}
           numberOfLines = {5}
-          placeholderTextColor="rgba(0, 0, 0, 0.3)"
+          placeholderTextColor="rgba(117, 117, 117, 0.8)"
         />
         <InputText
           onchange={(location) => this.setState({ location })}

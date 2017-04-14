@@ -17,9 +17,9 @@ export default class InputText extends Component {
               keyboardType={this.props.type}
               autoCorrect={false}
               placeholder={this.props.placeholder}
-              placeholderTextColor="rgba(0, 0, 0, 0.3)"
+              placeholderTextColor="rgba(117, 117, 117, 0.8)"
               selectionColor="#FFE082"
-              underlineColorAndroid="#e67e22"
+              underlineColorAndroid="#FF5722"
               secureTextEntry={this.props.secure}
               style={styles.inputStyle}
               onChangeText={this.props.onchange}
@@ -32,7 +32,7 @@ export default class InputText extends Component {
 const styles = StyleSheet.create({
   inputStyle: {
     height: 40,
-    color: "#000",
+    color: "#212121",
     backgroundColor: '#FFF',
     marginBottom: 10
   }

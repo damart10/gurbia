@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import {
   View,
   Text,
-  BackAndroid
+  BackAndroid,
+  StyleSheet,
+  ScrollView
 } from 'react-native'
 import Drawer from 'react-native-drawer'
 
@@ -30,15 +32,25 @@ export default class Home extends Component {
         openDrawerOffset={0.3}
         content={<Sidebar navigator={this.props.navigator}/>}
         >
-        <View>
-          <Navbar />
-          <Text> BODY HOME COMPONENT </Text>
-          <Button onpress={() => openDrawer()} text='OPEN DRAWER' />
+        <View style={styles.container}>
+          <Navbar
+            onpressnav={() => openDrawer()}
+          />
+          <ScrollView>
+
+          </ScrollView>
         </View>
       </Drawer>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#ffffff',
+    flex: 1,
+  }
+})
 
 BackAndroid.addEventListener('hardwareBackPress', () => {
   if (_navigator.getCurrentRoutes().length === 1  ) {
