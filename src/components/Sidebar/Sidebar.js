@@ -28,7 +28,7 @@ export default class Sidebar extends Component {
     super(props)
   }
 
-  navigate( id ) {
+  navigate(id) {
     this.props.navigator.push({ id });
   }
 

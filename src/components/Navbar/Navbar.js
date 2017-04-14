@@ -15,7 +15,7 @@ export default class Navbar extends Component {
   render() {
     return(
       <View style={styles.navContainer}>
-        <View style={styles.buttonContainer}>
+        <View style={[styles.buttonContainer, {marginLeft: 5}]}>
           <TouchableOpacity
             style={styles.button}
             activeOpacity={0.7}
@@ -27,7 +27,7 @@ export default class Navbar extends Component {
             />
           </TouchableOpacity>
         </View>
-        <View style={styles.buttonContainer}>
+        <View style={[styles.buttonContainer, {marginRight: 5}]}>
           <TouchableOpacity
             style={styles.button}
             activeOpacity={0.7}
@@ -49,13 +49,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    height: 40,
-    backgroundColor: '#F44336'
+    backgroundColor: '#F44336',
+    height: 40
   },
   buttonContainer: {
-    padding: 2,
-    height: 38,
-    width: 38
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 40,
+    width: 40
   },
   button: {
     height: 35,
