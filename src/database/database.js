@@ -57,36 +57,36 @@ export default class Database {
           return imageRef.getDownloadURL()
         })
         .then((url) => {
-          this.zelda = url
-          console.log('Mi URL es: ', this.zelda)
-          return url
+          resolve(url)
         })
         .catch((error) => {
           reject(error)
         })
     })
-}
+  }
 
   static writePost(picture, title, description, location, portions, price) {
     this.uploadImage(picture)
+      .then( res => {
+        var user = firebase.auth().currentUser;
+        var newPostKey = firebase.database().ref().child('posts').push().key;
+        var postData = {
+          uid:             user.uid,
+          postPic:         res,
+          postTitle:       title,
+          postDescription: description,
+          postLocation:    location,
+          postPortions:    portions,
+          postPrice:       price
+        };
 
-    var user = firebase.auth().currentUser;
-    var newPostKey = firebase.database().ref().child('posts').push().key;
-    var postData = {
-      uid:             user.uid,
-      postPic:         this.zelda,
-      postTitle:       title,
-      postDescription: description,
-      postLocation:    location,
-      postPortions:    portions,
-      postPrice:       price
-    };
+        var updates = {};
+        updates['posts/' + newPostKey] = postData;
+        updates['user-posts/' + user.uid + '/' + newPostKey] = postData;
 
-    var updates = {};
-    updates['posts/' + newPostKey] = postData;
-    updates['user-posts/' + user.uid + '/' + newPostKey] = postData;
+        firebase.database().ref().update(updates);
+      })
 
-    firebase.database().ref().update(updates);
   }
 
 

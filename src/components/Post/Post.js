@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   postImage: {
-    height: 180,
+    height: 200,
   },
   infoContainer: {
     padding: 5,
