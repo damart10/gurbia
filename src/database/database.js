@@ -12,9 +12,15 @@ export default class Database {
     try{
       firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(res => {
+          res.updateProfile({
+            displayName: (firstname + ' ' + lastname),
+            photoURL: "https://firebasestorage.googleapis.com/v0/b/gurbia-79ddc.appspot.com/o/Profile%2Fplaceholder.png?alt=media&token=87da416d-ab29-4f6b-857f-c06a3618c11f"
+          });
           firebase.database().ref('users/' + res.uid).set({
             username: (firstname + ' ' + lastname),
-            email
+            email,
+            photoURL: "https://firebasestorage.googleapis.com/v0/b/gurbia-79ddc.appspot.com/o/Profile%2Fplaceholder.png?alt=media&token=87da416d-ab29-4f6b-857f-c06a3618c11f",
+            rate: '0'
           });
         });
       console.log('Success');
@@ -72,6 +78,7 @@ export default class Database {
         var newPostKey = firebase.database().ref().child('posts').push().key;
         var postData = {
           uid:             user.uid,
+          authorName:      user.displayName,
           postPic:         res,
           postTitle:       title,
           postDescription: description,
