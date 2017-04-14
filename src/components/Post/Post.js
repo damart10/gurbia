@@ -14,8 +14,8 @@ export default class Post extends Component {
     this.navigate = this.navigate.bind(this);
   }
 
-  navigate(id) {
-    this.props.navigator.push({ id, key })
+  navigate({ id, data }) {
+    this.props.navigator.push({ id, data })
   }
 
   render() {
@@ -23,18 +23,18 @@ export default class Post extends Component {
       <TouchableOpacity
         style={styles.postContainer}
         activeOpacity={0.8}
-        //onPress={() => this.navigate({ id: 'PostView', key: this.props.info.key })}
+        onPress={() => this.navigate({ id: 'PostView', data: this.props.info })}
       >
         <View style={styles.imageContainer}>
           <Image
-            source={{uri:this.props.info.Picture}}
+            source={{uri:this.props.info.picture}}
             style={styles.postImage}
           />
         </View>
         <View style={styles.infoContainer}>
           <View style={styles.principalInfoContainer}>
             <View>
-              <Text style={styles.foodNameText}>{this.props.info.Title}</Text>
+              <Text style={styles.foodNameText}>{this.props.info.title}</Text>
               <Text style={styles.usernameText}>{this.props.info.uid}</Text>
             </View>
             <View>
@@ -43,7 +43,7 @@ export default class Post extends Component {
           </View>
           <View style={styles.foodInfoContainer}>
             <Text style={styles.foodDescription}>
-              {this.props.info.Description}
+              {this.props.info.description}
             </Text>
           </View>
         </View>
