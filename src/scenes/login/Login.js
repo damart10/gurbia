@@ -18,7 +18,7 @@ export default class Login extends Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
   }
 
-  navigate( id ) {
+  navigate(id) {
     this.props.navigator.push({ id });
   }
 

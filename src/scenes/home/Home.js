@@ -13,8 +13,8 @@ import Navbar from './../../components/Navbar/Navbar'
 import Button from './../../components/Button/Button'
 
 export default class Home extends Component {
-  constructor( props ) {
-    super( props )
+  constructor(props) {
+    super(props)
   }
 
   render() {

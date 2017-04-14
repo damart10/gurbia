@@ -25,7 +25,7 @@ export default class CreatePost extends Component {
   componentWillMount(){
     this.setState({imagePath: 'http://thugify.com/wp-content/uploads/2016/08/placeholder.jpg'})
   }
-  navigate( id ) {
+  navigate(id) {
     this.props.navigator.push({ id });
   }
 

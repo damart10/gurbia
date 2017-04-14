@@ -2,6 +2,10 @@ import * as firebase from 'firebase'
 
 export default class Database {
 
+  constructor() {
+    var usuario = {};
+  }
+
   static createUser(firstname, lastname, email, password) {
     try{
       firebase.auth().createUserWithEmailAndPassword(email, password)
