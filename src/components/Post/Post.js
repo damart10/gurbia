@@ -27,15 +27,15 @@ export default class Post extends Component {
       >
         <View style={styles.imageContainer}>
           <Image
-            source={require('./../../resources/placeholder.png')}
+            source={{uri:this.props.info.Picture}}
             style={styles.postImage}
           />
         </View>
         <View style={styles.infoContainer}>
           <View style={styles.principalInfoContainer}>
             <View>
-              <Text style={styles.foodNameText}>{this.props.info.foodName}</Text>
-              <Text style={styles.usernameText}>{this.props.info.userName}</Text>
+              <Text style={styles.foodNameText}>{this.props.info.Title}</Text>
+              <Text style={styles.usernameText}>{this.props.info.uid}</Text>
             </View>
             <View>
               <Text> CALIFICATION PLACEHOLDER</Text>
@@ -43,7 +43,7 @@ export default class Post extends Component {
           </View>
           <View style={styles.foodInfoContainer}>
             <Text style={styles.foodDescription}>
-              {this.props.info.description}
+              {this.props.info.Description}
             </Text>
           </View>
         </View>
@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
   },
   postImage: {
     height: 200,
+    width: 250,
   },
   infoContainer: {
     padding: 5,

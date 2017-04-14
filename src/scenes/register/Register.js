@@ -90,7 +90,7 @@ export default class Register extends Component {
 const styles = StyleSheet.create({
   formContainer: {
     flex: 1,
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     padding: 40,
     backgroundColor: '#fff'
   }

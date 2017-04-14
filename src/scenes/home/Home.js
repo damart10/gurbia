@@ -9,29 +9,51 @@ import {
   StyleSheet
 } from 'react-native'
 import Drawer from 'react-native-drawer'
+import ActionButton from 'react-native-action-button'
 
 import Sidebar from './../../components/Sidebar/Sidebar'
 import Navbar from './../../components/Navbar/Navbar'
 import Post from './../../components/Post/Post'
 
-const data = [
-  {
-    foodName: 'Comida rica',
-    userName: 'El viejo pere',
-    description: 'Bacon ipsum dolor amet biltong prosciutto drumstick, fatback t-bone bacon short ribs sausage tail chuck capicola rump. Tri-tip porchetta t-bone rump. Beef ribs shankle pork loin meatball turkey. ',
-    key: 1
-  },
-  {
-    foodName: 'Comida más rica',
-    userName: 'La tía Diana',
-    description: 'Bacon ipsum dolor amet biltong prosciutto drumstick, fatback t-bone bacon short ribs sausage tail chuck capicola rump. Tri-tip porchetta t-bone rump. Beef ribs shankle pork loin meatball turkey. ',
-    key: 2
-  }
-]
+import Database from './../../database/database'
 
 export default class Home extends Component {
   constructor(props) {
     super(props)
+
+    this.state = {
+      data: {}
+    }
+
+    this.navigate = this.navigate.bind(this);
+  }
+
+  componentWillMount() {
+    this.fetchPosts().then( data => {
+      this.setState({
+        data: data
+      })
+    });
+  }
+
+  navigate(id) {
+    this.props.navigator.push({ id });
+  }
+
+  async fetchPosts() {
+    var data = await Database.getPosts();
+    return data;
+  }
+
+  formatData = () => {
+    let postData = [];
+    for(var i in this.state.data){
+      postData.push({
+        key: i,
+        data: this.state.data[i]
+      })
+    }
+    return postData;
   }
 
   render() {
@@ -41,10 +63,12 @@ export default class Home extends Component {
     openDrawer = () => {
       this._drawer.open()
     };
-    const posts = data.map( data => {
+
+    const posts = this.formatData();
+    const postsComponents = posts.map( data => {
       return (
         <Post
-          info={{ ...data }}
+          info={{ ...data.data }}
           key={data.key}
           navigator={this.props.navigator}
         />
@@ -60,10 +84,15 @@ export default class Home extends Component {
         <View style={styles.container}>
           <Navbar
             onpressnav={() => openDrawer()}
+            type='Home'
           />
           <ScrollView style={styles.postsList}>
-            {posts}
+            {postsComponents}
           </ScrollView>
+          <ActionButton
+            buttonColor='rgba(255, 87, 34, 1)'
+            onPress={() => this.navigate('CreatePost')}
+          />
         </View>
       </Drawer>
     )

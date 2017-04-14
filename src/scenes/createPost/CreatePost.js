@@ -5,12 +5,18 @@ import {
   Text,
   Image,
   StyleSheet,
+  TouchableOpacity,
+  KeyboardAvoidingView,
   TextInput
 } from 'react-native'
 import Database from '../../database/database'
 import Button from '../../components/Button/Button'
 import InputText from '../../components/InputText/InputText'
 import ImagePicker from 'react-native-image-crop-picker'
+import Icon from 'react-native-vector-icons/MaterialIcons'
+import ActionButton from 'react-native-action-button'
+
+import Navbar from './../../components/Navbar/Navbar'
 
 
 export default class CreatePost extends Component {
@@ -74,44 +80,69 @@ export default class CreatePost extends Component {
 
   render() {
     return(
-      <View style={styles.formContainer}>
-        <Image source={{uri:this.state.imagePath}} style={styles.uploadAvatar}/>
-        <InputText
-          onchange={(title) => this.setState({ title })}
-          type='default'
-          placeholder='TITLE'
-          secure={false}
+      <View style={styles.createContainer}>
+        <Navbar
+          onpressnav={() => { _navigator.pop()}}
+          type=''
         />
-        <TextInput
-          onChangeText={(description) => this.setState({ description })}
-          type='default'
-          placeholder='DESCRIPTION'
-          multiline={true}
-          maxLength={140}
-          numberOfLines = {5}
-          placeholderTextColor="rgba(117, 117, 117, 0.8)"
-        />
-        <InputText
-          onchange={(location) => this.setState({ location })}
-          type='default'
-          placeholder='LOCATION'
-          secure={false}
-        />
-        <View>
-          <InputText
-            onchange={(portions) => this.setState({ portions })}
-            type='default'
-            placeholder='PORTIONS'
-            secure={false}
-          />
-          <InputText
-            onchange={(price) => this.setState({ price })}
-            type='default'
-            placeholder='PRICE'
-            secure={false}
-          />
-        </View>
-        <Button onpress={() => this.openImage()} text='UPLOAD IMAGE' />
+        <KeyboardAvoidingView
+          behavior='position'
+          style={styles.container}>
+          <View style={styles.imageContainer}>
+            <Image
+              style={styles.image}
+              source={{uri:this.state.imagePath}}
+            />
+            <ActionButton
+              buttonColor='rgba(255, 87, 34, 1)'
+              onPress={() => this.openImage()}
+              offsetX={75}
+              offsetY={0}
+            />
+          </View>
+          <View
+            style={styles.formContainer}>
+            <InputText
+              onchange={(title) => this.setState({ title })}
+              type='default'
+              placeholder='TITLE'
+              secure={false}
+            />
+            <TextInput
+              onChangeText={(description) => this.setState({ description })}
+              type='default'
+              placeholder='DESCRIPTION'
+              multiline={true}
+              maxLength={140}
+              numberOfLines = {4}
+              placeholderTextColor="rgba(117, 117, 117, 0.8)"
+            />
+            <InputText
+              onchange={(location) => this.setState({ location })}
+              type='default'
+              placeholder='LOCATION'
+              secure={false}
+            />
+            <View style={styles.horizontalAlign}>
+              <View style={styles.inputContainer}>
+                <InputText
+                  onchange={(portions) => this.setState({ portions })}
+                  type='default'
+                  placeholder='PORTIONS'
+                  secure={false}
+                />
+              </View>
+              <View style={styles.inputContainer}>
+                <InputText
+                  onchange={(price) => this.setState({ price })}
+                  type='default'
+                  placeholder='PRICE'
+                  secure={false}
+                />
+              </View>
+            </View>
+          </View>
+        </KeyboardAvoidingView>
         <Button onpress={() => this.handleFormSubmit()} text='SUBMIT' />
       </View>
     )
@@ -119,19 +150,44 @@ export default class CreatePost extends Component {
 }
 
 const styles = StyleSheet.create({
-
+  createContainer:{
+    backgroundColor: '#FFF',
+    flex: 1,
+  },
+  container: {
+    flex: 1,
+  },
   formContainer: {
-    flex: 3,
     justifyContent: 'center',
     alignItems: 'stretch',
-    padding: 40,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
+    padding: 30
   },
-  uploadAvatar:{
+  imageContainer:{
+    backgroundColor: '#CDCDCD'
+  },
+  image: {
     height: 200,
     width: 200,
     alignSelf: 'center',
-    marginBottom: 30
-
+    padding: 10,
+  },
+  addButtonContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 45,
+    height: 45,
+  },
+  addButton: {
+    backgroundColor: '#FF5722',
+    borderRadius: 25,
+  },
+  horizontalAlign: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around'
+  },
+  inputContainer: {
+    width: 150,
   }
 })

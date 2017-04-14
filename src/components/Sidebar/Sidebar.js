@@ -12,14 +12,6 @@ const data = [
   {
     key: 'Home',
     text: 'Home'
-  },
-  {
-    key: 'Login',
-    text: 'Login'
-  },
-  {
-    key: 'Register',
-    text: 'Register'
   }
 ]
 

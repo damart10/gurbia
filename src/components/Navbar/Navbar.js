@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import {
   View,
   Text,
-  Image,
   StyleSheet,
   TouchableOpacity
 } from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default class Navbar extends Component {
   constructor(props) {
@@ -13,18 +13,16 @@ export default class Navbar extends Component {
   }
 
   render() {
+    console.log(this.props.type);
     return(
       <View style={styles.navContainer}>
-        <View style={[styles.buttonContainer, {marginLeft: 5}]}>
+        <View style={[styles.buttonContainer, {marginLeft: 3}]}>
           <TouchableOpacity
             style={styles.button}
             activeOpacity={0.7}
             onPress={this.props.onpressnav}
           >
-            <Image
-              source={require('./../../resources/menu.png')}
-              style={styles.icon}
-            />
+            <Icon name={((this.props.type == 'Home') ? 'menu' : 'arrow-back')} size={32} color='#FFF'/>
           </TouchableOpacity>
         </View>
         <View style={[styles.buttonContainer, {marginRight: 5}]}>
@@ -33,10 +31,7 @@ export default class Navbar extends Component {
             activeOpacity={0.7}
             onPress={this.props.onpressserach}
           >
-            <Image
-              source={require('./../../resources/search.png')}
-              style={styles.icon}
-            />
+            <Icon name={((this.props.type == 'Home') ? 'search' : 'more-vert')} size={32} color='#FFF'/>
           </TouchableOpacity>
         </View>
       </View>
@@ -61,9 +56,5 @@ const styles = StyleSheet.create({
   button: {
     height: 35,
     width: 35
-  },
-  icon: {
-    height: 32,
-    width: 32
   }
 })
