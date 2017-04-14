@@ -27,14 +27,14 @@ export default class Post extends Component {
       >
         <View style={styles.imageContainer}>
           <Image
-            source={{uri:this.props.info.Picture}}
+            source={{uri:this.props.info.picture}}
             style={styles.postImage}
           />
         </View>
         <View style={styles.infoContainer}>
           <View style={styles.principalInfoContainer}>
             <View>
-              <Text style={styles.foodNameText}>{this.props.info.Title}</Text>
+              <Text style={styles.foodNameText}>{this.props.info.title}</Text>
               <Text style={styles.usernameText}>{this.props.info.uid}</Text>
             </View>
             <View>
@@ -43,7 +43,7 @@ export default class Post extends Component {
           </View>
           <View style={styles.foodInfoContainer}>
             <Text style={styles.foodDescription}>
-              {this.props.info.Description}
+              {this.props.info.description}
             </Text>
           </View>
         </View>

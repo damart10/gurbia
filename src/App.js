@@ -9,6 +9,7 @@ import Login from './scenes/login/Login'
 import Register from './scenes/register/Register'
 import Home from './scenes/home/Home'
 import CreatePost from './scenes/createPost/CreatePost'
+import Profile from './scenes/profile/Profile'
 
 export default class App extends Component {
   constructor( props ) {
@@ -40,6 +41,9 @@ export default class App extends Component {
         break;
       case 'CreatePost':
         return( <CreatePost navigator={_navigator} />);
+        break;
+      case 'Profile': 
+        return(<Profile navigator={_navigator} />);
         break;
       default:
         return ( <Text>SOMETHING WENT WRONG ${route}</Text> );
