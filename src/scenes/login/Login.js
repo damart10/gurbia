@@ -5,15 +5,16 @@ import {
   Image,
   StyleSheet
 } from 'react-native'
-import Database from '../../database/database'
 
+const Sound = require('react-native-sound')
+import Database from '../../database/database'
 import Button from '../../components/Button/Button'
 import InputText from '../../components/InputText/InputText'
 
 export default class Login extends Component {
   constructor(props) {
     super(props)
-
+    Sound.setCategory('Playback');
     this.navigate = this.navigate.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
   }
@@ -33,16 +34,28 @@ export default class Login extends Component {
 
   handleFormSubmit() {
     try {
-      if(this.validateEmail(this.state.email)) {
-        Database.loginUser(this.state.email, this.state.password);
-        this.navigate('Home');
-      }
-      else {
-        alert('Malformed email');
-      }
-    } catch(error) {
-      console.log('Error: ', error);
+      if(this.state.email == 'cuatroBabys@malumita.com') {
+         const cuatro = new Sound('cuatrobabys.mp3', Sound.MAIN_BUNDLE, (error) => {
+            if(error) {
+              console.log('soy el error');
+              return;
+            }
+            cuatro.play();
+            cuatro.setVolume(1);
+          });
+      } else {
+        if(this.validateEmail(this.state.email)) {
+          Database.loginUser(this.state.email, this.state.password);
+          this.navigate('Home');
+        }
+        else {
+          alert('Malformed email');
+        }
+      } 
     }
+    catch(error) {
+        console.log('Error: ', error);
+      }
   }
 
   render() {
