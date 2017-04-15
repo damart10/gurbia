@@ -12,6 +12,10 @@ const data = [
   {
     key: 'Home',
     text: 'Home'
+  },
+  {
+    key: 'Profile',
+    text: 'Profile'
   }
 ]
 

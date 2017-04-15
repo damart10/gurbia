@@ -5,9 +5,10 @@ import {
   Image,
   StyleSheet
 } from 'react-native'
-import Database from '../../database/database'
 import StarRating from 'react-native-star-rating'
+
 import Navbar from './../../components/Navbar/Navbar'
+import Database from '../../database/database'
 
 export default class Profile extends Component {
   constructor(props) {

@@ -6,10 +6,15 @@ import {
   TouchableOpacity,
   StyleSheet
 } from 'react-native'
+import StarRating from 'react-native-star-rating'
 
 export default class Post extends Component {
   constructor(props) {
     super(props)
+
+    this.state = {
+      starCount: 3.5
+    }
 
     this.navigate = this.navigate.bind(this);
   }
@@ -35,10 +40,17 @@ export default class Post extends Component {
           <View style={styles.principalInfoContainer}>
             <View>
               <Text style={styles.foodNameText}>{this.props.info.title}</Text>
-              <Text style={styles.usernameText}>{this.props.info.uid}</Text>
+              <Text style={styles.usernameText}>{this.props.info.authorName}</Text>
             </View>
-            <View>
-              <Text> CALIFICATION PLACEHOLDER</Text>
+            <View style={styles.rateContainer}>
+              <StarRating
+                disabled={true}
+                maxStars={5}
+                rating={this.state.starCount}
+                starColor={'#D32F2F'}
+                emptyStarColor={'#f2828a'}
+                starSize= {30}
+              />
             </View>
           </View>
           <View style={styles.foodInfoContainer}>
@@ -87,6 +99,9 @@ const styles = StyleSheet.create({
   usernameText: {
     fontSize: 14,
     fontStyle: 'italic'
+  },
+  rateContainer:{
+    alignSelf: 'center'
   },
   foodInfoContainer: {
     padding: 5

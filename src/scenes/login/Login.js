@@ -35,7 +35,7 @@ export default class Login extends Component {
     try {
       if(this.validateEmail(this.state.email)) {
         Database.loginUser(this.state.email, this.state.password);
-        this.navigate('Profile');
+        this.navigate('Home');
       }
       else {
         alert('Malformed email');
