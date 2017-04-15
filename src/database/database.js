@@ -26,11 +26,20 @@ export default class Database {
   }
 
   static loginUser(email, password) {
-    try{
-      firebase.auth().signInWithEmailAndPassword(email, password);
-    } catch(error) {
-      console.error(error);
+    firebase.auth().signInWithEmailAndPassword(email, password).then(res => {return true})
+      .catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    if (errorCode === 'auth/wrong-password') {
+      alert('Wrong password.');
+      return false;
+    } else {
+      alert(errorMessage);
+      return false;
     }
+  });
+
   }
 
   static uploadImage(uri, mime = 'application/octet-stream'){
