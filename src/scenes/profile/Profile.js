@@ -6,24 +6,92 @@ import {
   StyleSheet
 } from 'react-native'
 import Database from '../../database/database'
+import StarRating from 'react-native-star-rating'
+import Navbar from './../../components/Navbar/Navbar'
 
 export default class Profile extends Component {
   constructor(props) {
-        super(props)
-        this.navigate = this.navigate.bind(this);
-        this.handleFormSubmit = this.handleFormSubmit.bind(this)
+        super(props);
+        this.state = {starCount: 3.5};
     }
 
 render() {
     const user = Database.getUser();
     return(
-            <View style={styles.fromContainer}>
-              <Text />
-              <Image 
-                source={{uri: user.photoURL}}
-                style={style.image}
-              />
-            </View>
-        )
+
+      <View style={styles.fromContainer}>
+        <Navbar
+          onpressnav={() => _navigator.pop()}
+          type=''
+        />
+        <View style={styles.backPhoto}>
+          <Image
+            source={{uri: user.photoURL}}
+            style={styles.image}
+          />
+        </View>
+        <View style={styles.nys}>
+          <View>
+            <Text style={styles.name}>
+              {user.displayName}
+            </Text>
+            <Text style={styles.email}>
+              {user.email}
+            </Text>
+          </View>
+          <StarRating
+            disabled={true}
+            maxStars={5}
+            rating={this.state.starCount}
+            starColor={'#D32F2F'}
+            emptyStarColor={'#f2828a'}
+            starSize= {30}
+          />
+          </View>
+
+      </View>
+
+      )
     }
 }
+
+const styles = StyleSheet.create({
+  formContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff'
+  },
+
+  nys: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around'
+  },
+
+  backPhoto: {
+    borderRadius: 5,
+    marginTop: 10,
+    marginLeft: 10,
+    marginRight: 10,
+    alignItems: 'center',
+    marginBottom: 30,
+    backgroundColor: '#DDDDDD'
+  },
+  name: {
+    justifyContent: 'center',
+    fontSize: 20,
+    fontWeight: '800'
+  },
+
+  email: {
+    fontSize: 15
+  },
+
+  image: {
+    height: 200,
+    width: 200,
+    justifyContent: 'center',
+    alignItems: 'stretch',
+    backgroundColor: '#fff'
+  }
+})

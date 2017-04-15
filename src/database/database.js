@@ -102,6 +102,6 @@ export default class Database {
   }
 
   static getUser(){
-    return database.auth().currentUser
+    return firebase.auth().currentUser
   }
 }

@@ -40,7 +40,7 @@ export default class Register extends Component {
             this.state.email,
             this.state.password
           );
-          this.navigate('Home');
+          this.navigate('Login');
         }
         else{
           alert('La contraseña debe tener minimo 8 caracteres')
@@ -85,7 +85,7 @@ export default class Register extends Component {
       </View>
     )
   }
-}1
+}
 
 const styles = StyleSheet.create({
   formContainer: {

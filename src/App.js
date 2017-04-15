@@ -9,11 +9,8 @@ import Login from './scenes/login/Login'
 import Register from './scenes/register/Register'
 import Home from './scenes/home/Home'
 import CreatePost from './scenes/createPost/CreatePost'
-<<<<<<< HEAD
 import Profile from './scenes/profile/Profile'
-=======
 import PostView from './scenes/postView/PostView'
->>>>>>> master
 
 export default class App extends Component {
   constructor( props ) {
@@ -46,13 +43,11 @@ export default class App extends Component {
       case 'CreatePost':
         return( <CreatePost navigator={_navigator} />);
         break;
-<<<<<<< HEAD
-      case 'Profile': 
+      case 'Profile':
         return(<Profile navigator={_navigator} />);
-=======
+        break;
       case 'PostView':
         return( <PostView navigator={_navigator} data={route.data}/>);
->>>>>>> master
         break;
       default:
         return( <Text>SOMETHING WENT WRONG ${route}</Text> );
