@@ -9,6 +9,8 @@ import {
 import StarRating from 'react-native-star-rating'
 import ActionButton from 'react-native-action-button'
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import Database from './../../database/database'
+
 
 import Navbar from './../../components/Navbar/Navbar'
 
@@ -19,6 +21,17 @@ export default class PostView extends Component {
     this.state = {
       starCount: 3.5
     }
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+  }
+
+  handleFormSubmit() {
+    var user = Database.getUser();
+    Database.subscribeToPost(
+      user.displayName, 
+      user.email,
+      user.uid,
+      this.props.data.key,
+      this.props.data.uid); 
   }
 
   render() {
@@ -66,7 +79,7 @@ export default class PostView extends Component {
         </View>
         <ActionButton
           buttonColor='rgba(255, 87, 34, 1)'
-          onPress={() => alert('Que lindo pedido hiciste')}
+          onPress={() => this.handleFormSubmit()}
           icon={
             <Icon name='keyboard-arrow-right' size={32} color='#FFFFFF' />
           }

@@ -92,6 +92,17 @@ export default class Database {
       })
   }
 
+  static subscribeToPost(username, email, userUID , postKey, postAuthorUid) {
+    var userData = {
+      userName:   username,
+      email:      email
+    };
+    var updates = {};
+    updates['posts/' + postKey + '/subscribedUsers/' + userUID] = userData;
+    updates['user-posts/' + postAuthorUid + '/' + postKey + '/subscribedUsers/' + userUID] = userData;
+    firebase.database().ref().update(updates);
+  }
+
   static getPosts(){
     var posts = [];
     return new Promise((resolve, reject) => {

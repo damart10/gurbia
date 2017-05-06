@@ -67,7 +67,7 @@ export default class Home extends Component {
     const postsComponents = posts.map( data => {
       return (
         <Post
-          info={{ ...data.data }}
+          info={{ ...data.data, key:data.key}}
           key={data.key}
           navigator={this.props.navigator}
         />
