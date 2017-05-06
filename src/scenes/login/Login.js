@@ -15,7 +15,7 @@ export default class Login extends Component {
   constructor(props) {
     super(props)
     Sound.setCategory('Playback');
-    
+
     this.navigate = this.navigate.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
   }
@@ -47,7 +47,8 @@ export default class Login extends Component {
           });
       } else {
         if(this.validateEmail(this.state.email)) {
-          if(Database.loginUser(this.state.email, this.state.password)) {
+          var loginResult = Database.loginUser(this.state.email, this.state.password);
+          if(loginResult) {
              this.navigate('Home');
           };
         }

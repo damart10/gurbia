@@ -25,20 +25,16 @@ export default class Database {
     }
   }
 
-  static loginUser(email, password) {
-    firebase.auth().signInWithEmailAndPassword(email, password).then(res => {return true})
+  static async loginUser(email, password) {
+    await firebase.auth().signInWithEmailAndPassword(email, password)
+      .then( res => {
+        return true;
+      })
       .catch(function(error) {
         var errorCode = error.code;
         var errorMessage = error.message;
-        if (errorCode === 'auth/wrong-password') {
-          alert('Wrong password.');
-          return false;
-        } else {
-         alert(errorMessage);
-         return false;
-        }
-     });
-     return true; 
+        alert(errorMessage);
+      });
   }
 
   static uploadImage(uri, mime = 'application/octet-stream'){
@@ -92,7 +88,7 @@ export default class Database {
         var updates = {};
         updates['posts/' + newPostKey] = postData;
         updates['user-posts/' + user.uid + '/' + newPostKey] = postData;
-        
+
         firebase.database().ref().update(updates);
       })
   }
