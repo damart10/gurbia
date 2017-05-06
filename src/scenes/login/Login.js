@@ -15,6 +15,7 @@ export default class Login extends Component {
   constructor(props) {
     super(props)
     Sound.setCategory('Playback');
+    
     this.navigate = this.navigate.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
   }
@@ -27,6 +28,7 @@ export default class Login extends Component {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(email);
   };
+
   validatePassword(password){
     if(password.length > 8){return true}
     else{return false}
@@ -46,12 +48,12 @@ export default class Login extends Component {
       } else {
         if(this.validateEmail(this.state.email)) {
           Database.loginUser(this.state.email, this.state.password);
-          this.navigate('Home');
+          this.props.navigator.replace({id: 'Home'});
         }
         else {
           alert('Malformed email');
         }
-      } 
+      }
     }
     catch(error) {
         console.log('Error: ', error);

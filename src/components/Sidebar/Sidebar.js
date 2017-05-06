@@ -39,8 +39,8 @@ export default class Sidebar extends Component {
         >
           <Text style={styles.buttonText}>{data.text}</Text>
         </TouchableOpacity>
-    )
-  })
+      )
+    })
     return (
       <View style={styles.container}>
         <View style={styles.imageContainer}>

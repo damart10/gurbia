@@ -1,6 +1,6 @@
 import * as firebase from 'firebase'
 import RNFetchBlob from 'react-native-fetch-blob'
-import {Platform} from 'react-native'
+import { Platform } from 'react-native'
 
 export default class Database {
 
