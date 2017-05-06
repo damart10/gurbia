@@ -38,6 +38,7 @@ export default class Database {
          return false;
         }
      });
+     return true; 
   }
 
   static uploadImage(uri, mime = 'application/octet-stream'){
@@ -91,7 +92,7 @@ export default class Database {
         var updates = {};
         updates['posts/' + newPostKey] = postData;
         updates['user-posts/' + user.uid + '/' + newPostKey] = postData;
-
+        
         firebase.database().ref().update(updates);
       })
   }
