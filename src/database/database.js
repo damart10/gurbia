@@ -115,6 +115,21 @@ export default class Database {
     })
   }
 
+  static getUserPosts(){
+    var posts = [];
+    var user = firebase.auth().currentUser;
+    return new Promise((resolve, reject) => {
+      firebase.database().ref('user-posts/'+ user.uid).limitToLast(20)
+      .once('value').then( (data) => {
+        resolve(data.val());
+      }).catch( error => {
+        reject(error);
+      })
+    })
+  }
+
+
+
   static getUser(){
     return firebase.auth().currentUser
   }
