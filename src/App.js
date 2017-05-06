@@ -11,6 +11,7 @@ import Home from './scenes/home/Home'
 import CreatePost from './scenes/createPost/CreatePost'
 import Profile from './scenes/profile/Profile'
 import PostView from './scenes/postView/PostView'
+import UserPost from './scenes/UserPost/UserPost'
 
 export default class App extends Component {
   constructor( props ) {
@@ -45,6 +46,9 @@ export default class App extends Component {
         break;
       case 'Profile':
         return(<Profile navigator={_navigator} />);
+        break;
+      case 'UserPost':
+        return(<UserPost navigator={_navigator} />);
         break;
       case 'PostView':
         return( <PostView navigator={_navigator} data={route.data}/>);

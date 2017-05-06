@@ -16,6 +16,10 @@ const data = [
   {
     key: 'Profile',
     text: 'Profile'
+  },
+  {
+    key: 'UserPost',
+    text: 'My posts'
   }
 ]
 
