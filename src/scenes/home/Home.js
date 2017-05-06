@@ -14,7 +14,6 @@ import ActionButton from 'react-native-action-button'
 import Sidebar from './../../components/Sidebar/Sidebar'
 import Navbar from './../../components/Navbar/Navbar'
 import Post from './../../components/Post/Post'
-
 import Database from './../../database/database'
 
 export default class Home extends Component {
