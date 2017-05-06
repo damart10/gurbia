@@ -26,15 +26,14 @@ export default class Database {
   }
 
   static async loginUser(email, password) {
-    await firebase.auth().signInWithEmailAndPassword(email, password)
-      .then( res => {
-        return true;
-      })
-      .catch(function(error) {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        alert(errorMessage);
-      });
+    try {
+      await firebase.auth().signInWithEmailAndPassword(email, password);
+      return true;
+    }
+    catch (error) {
+      alert(error.toString());
+      return false; 
+    }
   }
 
   static uploadImage(uri, mime = 'application/octet-stream'){

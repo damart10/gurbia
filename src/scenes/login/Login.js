@@ -47,10 +47,9 @@ export default class Login extends Component {
           });
       } else {
         if(this.validateEmail(this.state.email)) {
-          var loginResult = Database.loginUser(this.state.email, this.state.password);
-          if(loginResult) {
-             this.navigate('Home');
-          };
+          Database.loginUser(this.state.email, this.state.password).then(res => {
+            if(res) this.navigate('Home');
+          });
         }
         else {
           alert('Malformed email');
