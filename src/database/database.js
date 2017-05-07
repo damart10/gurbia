@@ -36,7 +36,7 @@ export default class Database {
     }
   }
 
-  static uploadImage(uri, mime = 'application/octet-stream'){
+  static uploadImage(uri, refFire, mime = 'application/octet-stream', ){
     const Blob = RNFetchBlob.polyfill.Blob
     const fs = RNFetchBlob.fs
     window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest
@@ -45,7 +45,7 @@ export default class Database {
       const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri
         const sessionId = new Date().getTime()
         let uploadBlob = null
-        const imageRef = firebase.storage().ref('Food').child(`${sessionId}`)
+        const imageRef = firebase.storage().ref(refFire).child(`${sessionId}`)
 
         fs.readFile(uploadUri, 'base64')
         .then((data) => {
@@ -69,7 +69,7 @@ export default class Database {
   }
 
   static writePost(picture, title, description, location, portions, price) {
-    this.uploadImage(picture)
+    this.uploadImage(picture, 'Food')
       .then( res => {
         var user = firebase.auth().currentUser;
         var newPostKey = firebase.database().ref().child('posts').push().key;
@@ -91,6 +91,23 @@ export default class Database {
         firebase.database().ref().update(updates);
       })
   }
+
+  static updateProfileFireBase(name, email, picture) {
+    this.uploadImage(picture, 'Profile')
+      .then(res => {
+        try {
+          var user =  firebase.auth().currentUser;
+          user.updateProfile({
+            displayName: name,
+            photoURL: res
+          });
+          user.updateEmail(email);
+        }
+        catch (error) {
+          alert(error.toString());
+        } 
+      });
+  } 
 
   static subscribeToPost(username, email, userUID , postKey, postAuthorUid) {
     var userData = {
