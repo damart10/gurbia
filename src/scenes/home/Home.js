@@ -64,6 +64,7 @@ export default class Home extends Component {
     };
 
     const posts = this.formatData();
+    console.log(posts);
     const postsComponents = posts.map( data => {
       return (
         <Post

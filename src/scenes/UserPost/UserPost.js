@@ -9,11 +9,10 @@ import {
   StyleSheet
 } from 'react-native'
 import Drawer from 'react-native-drawer'
-import ActionButton from 'react-native-action-button'
 
 import Sidebar from './../../components/Sidebar/Sidebar'
 import Navbar from './../../components/Navbar/Navbar'
-import Post from './../../components/Post/Post'
+import PostSubscriptions from './../../components/PostSubscriptions/PostSubscriptions'
 import Database from './../../database/database'
 
 export default class Home extends Component {
@@ -66,7 +65,7 @@ export default class Home extends Component {
     const posts = this.formatData();
     const postsComponents = posts.map( data => {
       return (
-        <Post
+        <PostSubscriptions
           info={{ ...data.data }}
           key={data.key}
           navigator={this.props.navigator}
@@ -88,10 +87,6 @@ export default class Home extends Component {
           <ScrollView style={styles.postsList}>
             {postsComponents}
           </ScrollView>
-          <ActionButton
-            buttonColor='rgba(255, 87, 34, 1)'
-            onPress={() => this.navigate('CreatePost')}
-          />
         </View>
       </Drawer>
     )

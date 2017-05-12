@@ -27,14 +27,17 @@ export default class PostView extends Component {
   handleFormSubmit() {
     var user = Database.getUser();
     Database.subscribeToPost(
-      user.displayName, 
+      user.displayName,
       user.email,
       user.uid,
       this.props.data.key,
-      this.props.data.uid); 
+      this.props.data.uid);
   }
 
   render() {
+    const pedidos = (this.props.data.subscribedUsers == undefined) ?
+                        0 :
+                        Object.keys(this.props.data.subscribedUsers).length;
     return(
       <View style={styles.container}>
         <Navbar
@@ -70,7 +73,8 @@ export default class PostView extends Component {
                 <Text style={{fontWeight: 'bold'}}>Price:</Text> {this.props.data.price}
               </Text>
               <Text style={styles.priceText}>
-                <Text style={{fontWeight: 'bold'}}>Portions:</Text> {this.props.data.portions}</Text>
+                <Text style={{fontWeight: 'bold'}}>Portions:</Text>
+                {pedidos}/{this.props.data.portions}</Text>
             </View>
             <Text style={styles.foodDescription}>
               {this.props.data.description}

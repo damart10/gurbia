@@ -32,7 +32,7 @@ export default class Database {
     }
     catch (error) {
       alert(error.toString());
-      return false; 
+      return false;
     }
   }
 
@@ -81,7 +81,8 @@ export default class Database {
           description: description,
           location:    location,
           portions:    portions,
-          price:       price
+          price:       price,
+          subscribedUsers: {}
         };
 
         var updates = {};
@@ -105,9 +106,9 @@ export default class Database {
         }
         catch (error) {
           alert(error.toString());
-        } 
+        }
       });
-  } 
+  }
 
   static subscribeToPost(username, email, userUID , postKey, postAuthorUid) {
     var userData = {
@@ -144,8 +145,6 @@ export default class Database {
       })
     })
   }
-
-
 
   static getUser(){
     return firebase.auth().currentUser
