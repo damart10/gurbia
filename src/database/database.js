@@ -139,7 +139,6 @@ export default class Database {
     updates['user-posts/' + postAuthorUid + '/' + postKey + '/subscribedUsers/' + userUID] = userData;
     updates['orders/' + userUID + '/' + postKey] = review;
     firebase.database().ref().update(updates);
-    this.reviewPost(postAuthorUid, postKey, 5);
   }
 
  
