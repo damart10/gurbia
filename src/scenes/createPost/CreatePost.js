@@ -47,9 +47,7 @@ export default class CreatePost extends Component {
           this.state.price
         );
         this.navigate('Home')
-        console.log('Holi');
-      }
-      else{
+      } else {
         alert('Por favor adjunte una imagen')
       }
 
@@ -63,10 +61,10 @@ export default class CreatePost extends Component {
         width: 200,
         height: 200,
         cropping: true
-        }).then(image => {
+      }).then(image => {
         console.log(image.path);
-
         this.setState({ imagePath: image.path })
+        console.log(this.state);
       }).catch(function (e) {
         console.log('El usuario no eligio foto',e)
       });
