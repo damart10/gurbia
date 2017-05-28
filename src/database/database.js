@@ -121,8 +121,7 @@ export default class Database {
       refUsers.child('rate').set(avg);
     });
     var usr = firebase.auth().currentUser;
-    console.log(usr.uid);
-    firebase.database().ref('/orders/' + usr.uid + '/' + postKey).child('rate').set(rate);
+    firebase.database().ref('orders/' + usr.uid + '/' + postKey).child('rate').set(rate);
   }
 
   static subscribeToPost(username, email, userUID , postKey, postAuthorUid) {
@@ -139,8 +138,8 @@ export default class Database {
     updates['posts/' + postKey + '/subscribedUsers/' + userUID] = userData;
     updates['user-posts/' + postAuthorUid + '/' + postKey + '/subscribedUsers/' + userUID] = userData;
     updates['orders/' + userUID + '/' + postKey] = review;
-    this.reviewPost(postAuthorUid, postKey, 5);
     firebase.database().ref().update(updates);
+    this.reviewPost(postAuthorUid, postKey, 5);
   }
 
  
