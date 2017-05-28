@@ -16,7 +16,8 @@ export default class Database {
             username: (firstname + ' ' + lastname),
             email,
             photoURL: "https://firebasestorage.googleapis.com/v0/b/gurbia-79ddc.appspot.com/o/Profile%2Fplaceholder.png?alt=media&token=87da416d-ab29-4f6b-857f-c06a3618c11f",
-            rate: '0'
+            rate: 0,
+            raters : 0
           });
         });
       console.log('Success');
@@ -110,18 +111,41 @@ export default class Database {
       });
   }
 
+   static reviewPost(postAuthorUid, postKey, rate) {
+    var refUsers = firebase.database().ref('users/' + postAuthorUid);
+    refUsers.once('value').then(data => {
+      var raters = data.val().raters;
+      var rateD = data.val().rate;
+      var avg = (rateD*raters + rate)/(raters+1);
+      refUsers.child('raters').set(raters + 1);
+      refUsers.child('rate').set(avg);
+    });
+    var usr = firebase.auth().currentUser;
+    console.log(usr.uid);
+    firebase.database().ref('/orders/' + usr.uid + '/' + postKey).child('rate').set(rate);
+  }
+
   static subscribeToPost(username, email, userUID , postKey, postAuthorUid) {
     var userData = {
       userName:   username,
       email:      email
     };
+    var review = {
+      postAuthorUid: postAuthorUid,
+      postKey: postKey,
+      rate: 0
+    };
     var updates = {};
     updates['posts/' + postKey + '/subscribedUsers/' + userUID] = userData;
     updates['user-posts/' + postAuthorUid + '/' + postKey + '/subscribedUsers/' + userUID] = userData;
+    updates['orders/' + userUID + '/' + postKey] = review;
+    this.reviewPost(postAuthorUid, postKey, 5);
     firebase.database().ref().update(updates);
   }
 
-  static getPosts(){
+ 
+
+  static getPosts() { 
     var posts = [];
     return new Promise((resolve, reject) => {
       firebase.database().ref('posts').limitToLast(20)
@@ -132,6 +156,8 @@ export default class Database {
       })
     })
   }
+
+  
 
   static getUserPosts(){
     var posts = [];
