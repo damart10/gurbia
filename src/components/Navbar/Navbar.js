@@ -13,7 +13,6 @@ export default class Navbar extends Component {
   }
 
   render() {
-    console.log(this.props.type);
     return(
       <View style={styles.navContainer}>
         <View style={[styles.buttonContainer, {marginLeft: 3}]}>
@@ -29,7 +28,7 @@ export default class Navbar extends Component {
           <TouchableOpacity
             style={styles.button}
             activeOpacity={0.7}
-            onPress={this.props.onpressserach}
+            onPress={this.props.onpressearch}
           >
             <Icon name={((this.props.type == 'Home') ? 'search' : 'more-vert')} size={32} color='#FFF'/>
           </TouchableOpacity>
