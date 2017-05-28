@@ -27,7 +27,13 @@ export default class PostView extends Component {
 
   componentWillMount() {
     if (this.props.data.subscribedUsers != undefined) {
-      this.setState({ subs: this.props.data.subscribedUsers });
+      this.setState({ 
+        subs: this.props.data.subscribedUsers 
+      });
+    } else {
+      this.setState({
+        subs: {}
+      });
     }
   }
 
