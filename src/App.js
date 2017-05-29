@@ -12,6 +12,7 @@ import CreatePost from './scenes/createPost/CreatePost'
 import Profile from './scenes/profile/Profile'
 import PostView from './scenes/postView/PostView'
 import UserPost from './scenes/UserPost/UserPost'
+import Orders from './scenes/Orders/Orders'
 import ViewSubscriptions from './scenes/ViewSubscriptions/ViewSubscriptions'
 
 export default class App extends Component {
@@ -50,6 +51,9 @@ export default class App extends Component {
         break;
       case 'UserPost':
         return( <UserPost navigator={_navigator} />);
+        break;
+      case 'Orders':
+        return( <Orders navigator={_navigator} data={route.data} />);
         break;
       case 'PostView':
         return( <PostView navigator={_navigator} data={route.data}/>);
