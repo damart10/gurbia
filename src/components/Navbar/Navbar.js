@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: '#F44336',
-    height: 40
+    height: 50
   },
   buttonContainer: {
     alignItems: 'center',

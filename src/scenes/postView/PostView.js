@@ -19,9 +19,6 @@ export default class PostView extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      starCount: 3.5
-    }
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
@@ -39,6 +36,7 @@ export default class PostView extends Component {
     const pedidos = (this.props.data.subscribedUsers == undefined) ?
                         0 :
                         Object.keys(this.props.data.subscribedUsers).length;
+    console.log(this.props.data);                        
     return(
       <View style={styles.container}>
         <Navbar
@@ -61,7 +59,7 @@ export default class PostView extends Component {
               <StarRating
                 disabled={true}
                 maxStars={5}
-                rating={this.state.starCount}
+                rating={this.props.data.rate}
                 starColor={'#D32F2F'}
                 emptyStarColor={'#f2828a'}
                 starSize= {30}

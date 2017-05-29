@@ -201,4 +201,15 @@ export default class Database {
   static getUser() {
     return firebase.auth().currentUser
   }
+
+  static getUserRate(uid) {
+    return new Promise((resolve, reject) => {
+      firebase.database().ref('users/' + uid)
+        .once('value').then((data) => {
+          resolve(data.val());
+        }).catch(error => {
+          reject(error);
+        })
+    })
+  }
 }
