@@ -17,8 +17,8 @@ import ViewSubscriptions from './scenes/ViewSubscriptions/ViewSubscriptions'
 import UpdateProfile from './scenes/updateProfile/UpdateProfile'
 
 export default class App extends Component {
-  constructor( props ) {
-    super( props )
+  constructor(props) {
+    super(props)
 
     this.renderScene = this.renderScene.bind(this);
 
@@ -34,34 +34,34 @@ export default class App extends Component {
 
   renderScene(route, navigator) {
     _navigator = navigator;
-    switch(route.id) {
+    switch (route.id) {
       case 'Login':
-        return( <Login navigator={_navigator} />);
+        return (<Login navigator={_navigator} />);
       case 'Register':
-        return( <Register navigator={_navigator} />);
+        return (<Register navigator={_navigator} />);
       case 'Home':
-        return( <Home navigator={_navigator} />);
+        return (<Home navigator={_navigator} />);
       case 'CreatePost':
-        return( <CreatePost navigator={_navigator} />);
+        return (<CreatePost navigator={_navigator} />);
       case 'Profile':
-        return( <Profile navigator={_navigator} />);
+        return (<Profile navigator={_navigator} />);
       case 'UserPost':
-        return( <UserPost navigator={_navigator} />);
+        return (<UserPost navigator={_navigator} />);
       case 'Orders':
-        return( <Orders navigator={_navigator} data={route.data} />);
+        return (<Orders navigator={_navigator} data={route.data} />);
       case 'PostView':
-        return( <PostView navigator={_navigator} data={route.data}/>);
+        return (<PostView navigator={_navigator} data={route.data} />);
       case 'ViewSubscriptions':
-        return( <ViewSubscriptions navigator={_navigator} data={route.data} />);
+        return (<ViewSubscriptions navigator={_navigator} data={route.data} />);
       case 'UpdateProfile':
-        return( <UpdateProfile navigator={_navigator} />);
+        return (<UpdateProfile navigator={_navigator} />);
       default:
-        return( <Text>SOMETHING WENT WRONG ${route}</Text> );
+        return (<Text>SOMETHING WENT WRONG ${route}</Text>);
     }
   }
 
   render() {
-    return(
+    return (
       <Navigator
         initialRoute={this.props.initialRoute}
         renderScene={this.renderScene}

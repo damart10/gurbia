@@ -27,7 +27,7 @@ export default class Home extends Component {
   }
 
   componentWillMount() {
-    this.fetchPosts().then( data => {
+    this.fetchPosts().then(data => {
       this.setState({
         data: data
       })
@@ -45,7 +45,7 @@ export default class Home extends Component {
 
   formatData = () => {
     let postData = [];
-    for(var i in this.state.data){
+    for (var i in this.state.data) {
       postData.push({
         key: i,
         data: this.state.data[i],
@@ -63,22 +63,24 @@ export default class Home extends Component {
     };
 
     const posts = this.formatData();
-    const postsComponents = posts.map( data => {
+    const postsComponents = posts.map(data => {
       return (
         <PostSubscriptions
           info={{ ...data.data }}
           key={data.key}
           navigator={this.props.navigator}
         />
-      )});
+      )
+    });
+    
     return (
       <Drawer
         type='overlay'
         ref={(ref) => this._drawer = ref}
         tapToClose={true}
         openDrawerOffset={0.3}
-        content={<Sidebar navigator={this.props.navigator}/>}
-        >
+        content={<Sidebar navigator={this.props.navigator} />}
+      >
         <View style={styles.container}>
           <Navbar
             onpressnav={() => openDrawer()}
@@ -105,8 +107,8 @@ const styles = StyleSheet.create({
 })
 
 BackAndroid.addEventListener('hardwareBackPress', () => {
-  if (_navigator.getCurrentRoutes().length === 1  ) {
-     return false;
+  if (_navigator.getCurrentRoutes().length === 1) {
+    return false;
   }
   _navigator.pop();
   return true;

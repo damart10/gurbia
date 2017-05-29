@@ -27,8 +27,7 @@ export default class UpdateProfile extends Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
-
-  componentWillMount(){
+  componentWillMount() {
     var { displayName, email, photoURL } = Database.getUser();
     this.setState({
       displayName,
@@ -42,7 +41,7 @@ export default class UpdateProfile extends Component {
   }
 
   handleFormSubmit() {
-  try {
+    try {
       Database.updateProfileFireBase(
         this.state.displayName,
         this.state.email,
@@ -50,30 +49,30 @@ export default class UpdateProfile extends Component {
       );
       _navigator.pop();
 
-    } catch(error) {
+    } catch (error) {
       console.log('Error: ', error);
     }
   }
 
-  openImage(){
+  openImage() {
     ImagePicker.openPicker({
       width: 200,
       height: 200,
       cropping: true
-    }).then( image => {
+    }).then(image => {
       console.log(image.path);
       this.setState({ photoURL: image.path });
       console.log(this.state);
-    }).catch(function(e) {
+    }).catch(function (e) {
       console.log('El usuario no eligio foto', e)
     });
   }
 
   render() {
-    return(
+    return (
       <View style={styles.createContainer}>
         <Navbar
-          onpressnav={() => { _navigator.pop()}}
+          onpressnav={() => { _navigator.pop() }}
           type=''
         />
         <KeyboardAvoidingView
@@ -82,7 +81,7 @@ export default class UpdateProfile extends Component {
           <View style={styles.imageContainer}>
             <Image
               style={styles.image}
-              source={{uri: this.state.photoURL}}
+              source={{ uri: this.state.photoURL }}
             />
             <ActionButton
               buttonColor='rgba(255, 87, 34, 1)'
@@ -114,7 +113,7 @@ export default class UpdateProfile extends Component {
 }
 
 const styles = StyleSheet.create({
-  createContainer:{
+  createContainer: {
     backgroundColor: '#FFF',
     flex: 1,
   },
@@ -127,7 +126,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 30
   },
-  imageContainer:{
+  imageContainer: {
     backgroundColor: '#CDCDCD'
   },
   image: {

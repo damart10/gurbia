@@ -5,7 +5,7 @@ import { Platform } from 'react-native'
 export default class Database {
 
   static createUser(firstname, lastname, email, password) {
-    try{
+    try {
       firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(res => {
           res.updateProfile({
@@ -17,11 +17,11 @@ export default class Database {
             email,
             photoURL: "https://firebasestorage.googleapis.com/v0/b/gurbia-79ddc.appspot.com/o/Profile%2Fplaceholder.png?alt=media&token=87da416d-ab29-4f6b-857f-c06a3618c11f",
             rate: 0,
-            raters : 0
+            raters: 0
           });
         });
       console.log('Success');
-    } catch(error) {
+    } catch (error) {
       console.error(error);
     }
   }
@@ -37,18 +37,18 @@ export default class Database {
     }
   }
 
-  static uploadImage(uri, refFire, mime = 'application/octet-stream', ){
+  static uploadImage(uri, refFire, mime = 'application/octet-stream', ) {
     const Blob = RNFetchBlob.polyfill.Blob
     const fs = RNFetchBlob.fs
     window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest
     window.Blob = Blob
     return new Promise((resolve, reject) => {
       const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri
-        const sessionId = new Date().getTime()
-        let uploadBlob = null
-        const imageRef = firebase.storage().ref(refFire).child(`${sessionId}`)
+      const sessionId = new Date().getTime()
+      let uploadBlob = null
+      const imageRef = firebase.storage().ref(refFire).child(`${sessionId}`)
 
-        fs.readFile(uploadUri, 'base64')
+      fs.readFile(uploadUri, 'base64')
         .then((data) => {
           return Blob.build(data, { type: `${mime};BASE64` })
         })
@@ -71,18 +71,18 @@ export default class Database {
 
   static writePost(picture, title, description, location, portions, price) {
     this.uploadImage(picture, 'Food')
-      .then( res => {
+      .then(res => {
         var user = firebase.auth().currentUser;
         var newPostKey = firebase.database().ref().child('posts').push().key;
         var postData = {
-          uid:         user.uid,
-          authorName:  user.displayName,
-          picture:     res,
-          title:       title,
+          uid: user.uid,
+          authorName: user.displayName,
+          picture: res,
+          title: title,
           description: description,
-          location:    location,
-          portions:    portions,
-          price:       price,
+          location: location,
+          portions: portions,
+          price: price,
           subscribedUsers: {}
         };
 
@@ -98,7 +98,7 @@ export default class Database {
     this.uploadImage(picture, 'Profile')
       .then(res => {
         try {
-          var user =  firebase.auth().currentUser;
+          var user = firebase.auth().currentUser;
           user.updateProfile({
             displayName: name,
             photoURL: res
@@ -111,12 +111,12 @@ export default class Database {
       });
   }
 
-   static reviewPost(postAuthorUid, postKey, rate) {
+  static reviewPost(postAuthorUid, postKey, rate) {
     var refUsers = firebase.database().ref('users/' + postAuthorUid);
     refUsers.once('value').then(data => {
       var raters = data.val().raters;
       var rateD = data.val().rate;
-      var avg = (rateD*raters + rate)/(raters+1);
+      var avg = (rateD * raters + rate) / (raters + 1);
       refUsers.child('raters').set(raters + 1);
       refUsers.child('rate').set(avg);
     });
@@ -124,14 +124,14 @@ export default class Database {
     firebase.database().ref('orders/' + usr.uid + '/' + postKey).child('rate').set(rate);
   }
 
-    static getPost(postId) {
+  static getPost(postId) {
     return firebase.database().ref('posts/' + postId);
   }
 
-  static subscribeToPost(username, email, userUID , postKey, postAuthorUid) {
+  static subscribeToPost(username, email, userUID, postKey, postAuthorUid) {
     var userData = {
-      userName:   username,
-      email:      email
+      userName: username,
+      email: email
     };
     var review = {
       postAuthorUid: postAuthorUid,
@@ -145,20 +145,17 @@ export default class Database {
     firebase.database().ref().update(updates);
   }
 
-
-
   static getPosts() {
     var posts = [];
     return new Promise((resolve, reject) => {
       firebase.database().ref('posts').limitToLast(20)
-      .once('value').then( (data) => {
-        resolve(data.val());
-      }).catch( error => {
-        reject(error);
-      })
+        .once('value').then((data) => {
+          resolve(data.val());
+        }).catch(error => {
+          reject(error);
+        })
     })
   }
-
 
   static getPost(postId) {
     return firebase.database().ref('posts/' + postId);
@@ -170,39 +167,36 @@ export default class Database {
     var user = firebase.auth().currentUser;
     return new Promise((resolve, reject) => {
       firebase.database().ref('orders/' + user.uid).limitToLast(20)
-      .once('value').then(async(data) => {
-        posts = data.val();
-        for(var i in posts) {
-          var a = await this.getPost(posts[i].postKey)
-          .once('value').then(data => {return data.val()})
-          postArr.push(a)
-        }
-        console.log("ESTE ES EL MENSAJITO CON LOS POST ARRAY ")
-        console.log(postArr)
-        resolve(postArr);
-      }).catch( error => {
-        reject(error);
-      })
+        .once('value').then(async (data) => {
+          posts = data.val();
+          for (var i in posts) {
+            var a = await this.getPost(posts[i].postKey)
+              .once('value').then(data => { return data.val() })
+            postArr.push(a)
+          }
+          console.log("ESTE ES EL MENSAJITO CON LOS POST ARRAY ")
+          console.log(postArr)
+          resolve(postArr);
+        }).catch(error => {
+          reject(error);
+        })
     })
   }
 
-
-  static getUserPosts(){
+  static getUserPosts() {
     var posts = [];
     var user = firebase.auth().currentUser;
     return new Promise((resolve, reject) => {
-      firebase.database().ref('user-posts/'+ user.uid).limitToLast(20)
-      .once('value').then( (data) => {
-        resolve(data.val());
-      }).catch( error => {
-        reject(error);
-      })
+      firebase.database().ref('user-posts/' + user.uid).limitToLast(20)
+        .once('value').then((data) => {
+          resolve(data.val());
+        }).catch(error => {
+          reject(error);
+        })
     })
   }
 
-
-
-  static getUser(){
+  static getUser() {
     return firebase.auth().currentUser
   }
 }
