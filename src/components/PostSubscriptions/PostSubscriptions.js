@@ -8,12 +8,14 @@ import {
 } from 'react-native'
 import StarRating from 'react-native-star-rating'
 
+import Database from './../../database/database'
+
 export default class Post extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      starCount: 3.5
+      starCount: 0
     }
 
     this.navigate = this.navigate.bind(this);
@@ -23,12 +25,29 @@ export default class Post extends Component {
     this.props.navigator.push({ id, data })
   }
 
+  componentWillMount() {
+    this.getRate().then((data) => {
+      console.log(data);
+      this.setState({
+        starCount: parseInt(data.rate)
+      })
+    })
+  }
+
+  async getRate() {
+    var rate = await Database.getUserRate(this.props.info.uid);
+    return rate;
+  }
+
   render() {
     return(
       <TouchableOpacity
         style={styles.postContainer}
         activeOpacity={0.8}
-        onPress={() => this.navigate({ id: 'ViewSubscriptions', data: this.props.info })}
+        onPress={() => this.navigate({ 
+          id: 'ViewSubscriptions', 
+          data: this.props.info
+        })}
       >
         <View style={styles.imageContainer}>
           <Image
