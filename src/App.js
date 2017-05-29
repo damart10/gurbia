@@ -12,6 +12,7 @@ import CreatePost from './scenes/createPost/CreatePost'
 import Profile from './scenes/profile/Profile'
 import PostView from './scenes/postView/PostView'
 import UserPost from './scenes/UserPost/UserPost'
+import Orders from './scenes/Orders/Orders'
 import ViewSubscriptions from './scenes/ViewSubscriptions/ViewSubscriptions'
 import UpdateProfile from './scenes/updateProfile/UpdateProfile'
 
@@ -46,6 +47,13 @@ export default class App extends Component {
         return( <Profile navigator={_navigator} />);
       case 'UserPost':
         return( <UserPost navigator={_navigator} />);
+<<<<<<< HEAD
+        break;
+      case 'Orders':
+        return( <Orders navigator={_navigator} data={route.data} />);
+        break;
+=======
+>>>>>>> refs/remotes/origin/master
       case 'PostView':
         return( <PostView navigator={_navigator} data={route.data}/>);
       case 'ViewSubscriptions':

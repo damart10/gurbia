@@ -145,9 +145,9 @@ export default class Database {
     firebase.database().ref().update(updates);
   }
 
- 
 
-  static getPosts() { 
+
+  static getPosts() {
     var posts = [];
     return new Promise((resolve, reject) => {
       firebase.database().ref('posts').limitToLast(20)
@@ -159,6 +159,35 @@ export default class Database {
     })
   }
 
+<<<<<<< HEAD
+  static getPost(postId) {
+    return firebase.database().ref('posts/' + postId);
+  }
+
+  static getOrders() {
+    var posts = [];
+    let postArr = [];
+    var user = firebase.auth().currentUser;
+    return new Promise((resolve, reject) => {
+      firebase.database().ref('orders/' + user.uid).limitToLast(20)
+      .once('value').then(async(data) => {
+        posts = data.val();
+        for(var i in posts) {
+          var a = await this.getPost(posts[i].postKey)
+          .once('value').then(data => {return data.val()})
+          postArr.push(a)
+        }
+        console.log("ESTE ES EL MENSAJITO CON LOS POST ARRAY ")
+        console.log(postArr)
+        resolve(postArr);
+      }).catch( error => {
+        reject(error);
+      })
+    })
+  }
+
+=======
+>>>>>>> refs/remotes/origin/master
   static getUserPosts(){
     var posts = [];
     var user = firebase.auth().currentUser;
@@ -171,6 +200,8 @@ export default class Database {
       })
     })
   }
+
+
 
   static getUser(){
     return firebase.auth().currentUser
