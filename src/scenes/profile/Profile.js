@@ -12,32 +12,46 @@ import Database from '../../database/database'
 
 export default class Profile extends Component {
   constructor(props) {
-        super(props);
-        this.state = {starCount: 3.5};
-    }
+    super(props);
 
-render() {
-    const user = Database.getUser();
+    this.state = {
+      starCount: 3.5
+    };
+
+    this.navigate = this.navigate.bind(this);
+  }
+
+  navigate(id) {
+    this.props.navigator.push({ id });
+  }
+
+  componentWillMount() {
+    this.setState({
+      user: Database.getUser()
+    })
+  }
+
+  render() {
     return(
-
       <View style={styles.fromContainer}>
         <Navbar
           onpressnav={() => _navigator.pop()}
+          onpressearch={() => this.navigate('UpdateProfile')}
           type=''
         />
         <View style={styles.backPhoto}>
           <Image
-            source={{uri: user.photoURL}}
+            source={{uri: this.state.user.photoURL}}
             style={styles.image}
           />
         </View>
         <View style={styles.nys}>
           <View>
             <Text style={styles.name}>
-              {user.displayName}
+              {this.state.user.displayName}
             </Text>
             <Text style={styles.email}>
-              {user.email}
+              {this.state.user.email}
             </Text>
           </View>
           <StarRating

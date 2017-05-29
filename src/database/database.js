@@ -124,6 +124,10 @@ export default class Database {
     firebase.database().ref('orders/' + usr.uid + '/' + postKey).child('rate').set(rate);
   }
 
+    static getPost(postId) {
+    return firebase.database().ref('posts/' + postId);
+  }
+
   static subscribeToPost(username, email, userUID , postKey, postAuthorUid) {
     var userData = {
       userName:   username,
@@ -155,6 +159,7 @@ export default class Database {
     })
   }
 
+<<<<<<< HEAD
   static getPost(postId) {
     return firebase.database().ref('posts/' + postId);
   }
@@ -181,6 +186,8 @@ export default class Database {
     })
   }
 
+=======
+>>>>>>> refs/remotes/origin/master
   static getUserPosts(){
     var posts = [];
     var user = firebase.auth().currentUser;

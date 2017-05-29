@@ -14,6 +14,7 @@ import PostView from './scenes/postView/PostView'
 import UserPost from './scenes/UserPost/UserPost'
 import Orders from './scenes/Orders/Orders'
 import ViewSubscriptions from './scenes/ViewSubscriptions/ViewSubscriptions'
+import UpdateProfile from './scenes/updateProfile/UpdateProfile'
 
 export default class App extends Component {
   constructor( props ) {
@@ -36,30 +37,29 @@ export default class App extends Component {
     switch(route.id) {
       case 'Login':
         return( <Login navigator={_navigator} />);
-        break;
       case 'Register':
         return( <Register navigator={_navigator} />);
-        break;
       case 'Home':
         return( <Home navigator={_navigator} />);
-        break;
       case 'CreatePost':
         return( <CreatePost navigator={_navigator} />);
-        break;
       case 'Profile':
         return( <Profile navigator={_navigator} />);
-        break;
       case 'UserPost':
         return( <UserPost navigator={_navigator} />);
+<<<<<<< HEAD
         break;
       case 'Orders':
         return( <Orders navigator={_navigator} data={route.data} />);
         break;
+=======
+>>>>>>> refs/remotes/origin/master
       case 'PostView':
         return( <PostView navigator={_navigator} data={route.data}/>);
-        break;
       case 'ViewSubscriptions':
-        return( <ViewSubscriptions navigator={_navigator} data={route.data} />)
+        return( <ViewSubscriptions navigator={_navigator} data={route.data} />);
+      case 'UpdateProfile':
+        return( <UpdateProfile navigator={_navigator} />);
       default:
         return( <Text>SOMETHING WENT WRONG ${route}</Text> );
     }
