@@ -86,7 +86,7 @@ export default class PostView extends Component {
           buttonColor='rgba(255, 87, 34, 1)'
           onPress={() => Alert.alert(
             'Confirmacion de pedido',
-            'Esta seguro que quieres suscribirse a esta publicacion?',
+            'Estas seguro que quieres suscribirse a esta publicacion?',
             [
               {text: 'No, gracias', onPress: () => console.log("Canceladei")},
               {text: 'Suscribirme!', onPress: () => this.handleFormSubmit()},

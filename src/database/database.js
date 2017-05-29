@@ -111,18 +111,20 @@ export default class Database {
       });
   }
 
-  static reviewPost(postAuthorUid, postKey, rate) {
+  static reviewPost(postAuthorUid, rate) {
     var refUsers = firebase.database().ref('users/' + postAuthorUid);
     refUsers.once('value').then(data => {
       var raters = data.val().raters;
       var rateD = data.val().rate;
+      console.log("RATERS RATERS RATERS RATERS RATERS RATERS RATERS RATERS RATERS RATERS RATERS RATERS RATERS RATERS RATERS RATERS RATERS RATERS RATERS RATERS RATERS RATERS RATERS RATERS ")
+      console.log(raters)
+      console.log(rateD)
       var avg = (rateD * raters + rate) / (raters + 1);
       refUsers.child('raters').set(raters + 1);
       refUsers.child('rate').set(avg);
+
     });
-    var usr = firebase.auth().currentUser;
-    firebase.database().ref('orders/' + usr.uid + '/' + postKey).child('rate').set(rate);
-  }
+}
 
   static getPost(postId) {
     return firebase.database().ref('posts/' + postId);

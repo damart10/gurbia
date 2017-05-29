@@ -12,7 +12,7 @@ import Drawer from 'react-native-drawer'
 
 import Sidebar from './../../components/Sidebar/Sidebar'
 import Navbar from './../../components/Navbar/Navbar'
-import PostSubscriptions from './../../components/PostSubscriptions/PostSubscriptions'
+import OrderBlock from './../../components/OrderBlock/OrderBlock'
 import Database from './../../database/database'
 
 export default class Home extends Component {
@@ -65,14 +65,14 @@ export default class Home extends Component {
     const posts = this.formatData();
     const postsComponents = posts.map(data => {
       return (
-        <PostSubscriptions
-          info={{ ...data.data }}
+        <OrderBlock
+          info={{ ...data.data}}
           key={data.key}
           navigator={this.props.navigator}
         />
       )
     });
-    
+
     return (
       <Drawer
         type='overlay'
