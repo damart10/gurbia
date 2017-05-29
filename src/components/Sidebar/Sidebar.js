@@ -20,6 +20,10 @@ const data = [
   {
     key: 'UserPost',
     text: 'My posts'
+  },
+  {
+    key: 'Orders',
+    text: 'My orders'
   }
 ]
 
