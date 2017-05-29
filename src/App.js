@@ -53,8 +53,8 @@ export default class App extends Component {
         return( <PostView navigator={_navigator} data={route.data}/>);
       case 'ViewSubscriptions':
         return( <ViewSubscriptions navigator={_navigator} data={route.data} />);
-      // case 'UpdateProfile':
-      //   return( <UpdateProfile navigator={_navigator} />);
+      case 'UpdateProfile':
+        return( <UpdateProfile navigator={_navigator} />);
       default:
         return( <Text>SOMETHING WENT WRONG ${route}</Text> );
     }
