@@ -47,19 +47,14 @@ export default class App extends Component {
         return( <Profile navigator={_navigator} />);
       case 'UserPost':
         return( <UserPost navigator={_navigator} />);
-<<<<<<< HEAD
-        break;
       case 'Orders':
         return( <Orders navigator={_navigator} data={route.data} />);
-        break;
-=======
->>>>>>> refs/remotes/origin/master
       case 'PostView':
         return( <PostView navigator={_navigator} data={route.data}/>);
       case 'ViewSubscriptions':
         return( <ViewSubscriptions navigator={_navigator} data={route.data} />);
-      case 'UpdateProfile':
-        return( <UpdateProfile navigator={_navigator} />);
+      // case 'UpdateProfile':
+      //   return( <UpdateProfile navigator={_navigator} />);
       default:
         return( <Text>SOMETHING WENT WRONG ${route}</Text> );
     }

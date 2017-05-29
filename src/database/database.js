@@ -159,7 +159,7 @@ export default class Database {
     })
   }
 
-<<<<<<< HEAD
+
   static getPost(postId) {
     return firebase.database().ref('posts/' + postId);
   }
@@ -186,8 +186,7 @@ export default class Database {
     })
   }
 
-=======
->>>>>>> refs/remotes/origin/master
+
   static getUserPosts(){
     var posts = [];
     var user = firebase.auth().currentUser;
