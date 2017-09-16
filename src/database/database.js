@@ -116,9 +116,6 @@ export default class Database {
     refUsers.once('value').then(data => {
       var raters = data.val().raters;
       var rateD = data.val().rate;
-      console.log("RATERS RATERS RATERS RATERS RATERS RATERS RATERS RATERS RATERS RATERS RATERS RATERS RATERS RATERS RATERS RATERS RATERS RATERS RATERS RATERS RATERS RATERS RATERS RATERS ")
-      console.log(raters)
-      console.log(rateD)
       var avg = (rateD * raters + rate) / (raters + 1);
       refUsers.child('raters').set(raters + 1);
       refUsers.child('rate').set(avg);
@@ -145,7 +142,21 @@ export default class Database {
     updates['user-posts/' + postAuthorUid + '/' + postKey + '/subscribedUsers/' + userUID] = userData;
     updates['orders/' + userUID + '/' + postKey] = review;
     firebase.database().ref().update(updates);
+
+    fetch('https://backgurbia.herokuapp.com/', {
+      method: 'POST',
+      body: JSON.stringify({
+        userID: userUID,
+        postID: postKey
+      })
+    })
+    .then((response) => response.json())
+    .then((responeJson) => {
+      console.log(responeJson);
+    })
   }
+
+  static getRecommendations
 
   static getPosts() {
     var posts = [];
