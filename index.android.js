@@ -5,8 +5,8 @@ import App from './src/App'
 
 export default class Gurbia extends Component {
   render() {
-    return(
-      <App initialRoute={{id: 'Login'}} />
+    return (
+      <App initialRoute={{ id: 'Login' }} />
     )
   }
 }

@@ -16,7 +16,7 @@ import Navbar from './../../components/Navbar/Navbar'
 import Post from './../../components/Post/Post'
 import Database from './../../database/database'
 
-export default class Home extends Component {
+export default class Recommendations extends Component {
   constructor(props) {
     super(props)
 
@@ -40,7 +40,7 @@ export default class Home extends Component {
   }
 
   async fetchPosts() {
-    var data = await Database.getPosts();
+    var data = await Database.getRecommendedPosts();
     return data;
   }
 
@@ -75,27 +75,20 @@ export default class Home extends Component {
     });
 
     return (
-      <Drawer
-        type='overlay'
-        ref={(ref) => this._drawer = ref}
-        tapToClose={true}
-        openDrawerOffset={0.3}
-        content={<Sidebar navigator={this.props.navigator} />}
-      >
-        <View style={styles.container}>
-          <Navbar
-            onpressnav={() => openDrawer()}
-            type='Home'
-          />
-          <ScrollView style={styles.postsList}>
-            {postsComponents}
-          </ScrollView>
-          <ActionButton
-            buttonColor='rgba(255, 87, 34, 1)'
-            onPress={() => this.navigate('CreatePost')}
-          />
-        </View>
-      </Drawer>
+      <View style={styles.container}>
+        <Navbar
+          onpressnav={() => _navigator.pop()}
+          //onpressearch={() => this.navigate('UpdateProfile')}
+          type=''
+        />
+        <ScrollView style={styles.postsList}>
+          <Text>HOLITA</Text>
+        </ScrollView>
+        <ActionButton
+          buttonColor='rgba(255, 87, 34, 1)'
+          onPress={() => this.navigate('CreatePost')}
+        />
+      </View>
     )
   }
 }

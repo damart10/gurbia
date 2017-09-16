@@ -50,7 +50,7 @@ export default class UpdateProfile extends Component {
       _navigator.pop();
 
     } catch (error) {
-      console.log('Error: ', error);
+      console.error('Error: ', error);
     }
   }
 
@@ -60,11 +60,9 @@ export default class UpdateProfile extends Component {
       height: 200,
       cropping: true
     }).then(image => {
-      console.log(image.path);
       this.setState({ photoURL: image.path });
-      console.log(this.state);
     }).catch(function (e) {
-      console.log('El usuario no eligio foto', e)
+      console.log('El usuario no eligio foto ', e)
     });
   }
 

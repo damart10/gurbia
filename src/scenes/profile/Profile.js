@@ -32,7 +32,7 @@ export default class Profile extends Component {
   }
 
   render() {
-    return(
+    return (
       <View style={styles.fromContainer}>
         <Navbar
           onpressnav={() => _navigator.pop()}
@@ -41,7 +41,7 @@ export default class Profile extends Component {
         />
         <View style={styles.backPhoto}>
           <Image
-            source={{uri: this.state.user.photoURL}}
+            source={{ uri: this.state.user.photoURL }}
             style={styles.image}
           />
         </View>
@@ -60,14 +60,14 @@ export default class Profile extends Component {
             rating={this.state.starCount}
             starColor={'#D32F2F'}
             emptyStarColor={'#f2828a'}
-            starSize= {30}
+            starSize={30}
           />
-          </View>
+        </View>
 
       </View>
 
-      )
-    }
+    )
+  }
 }
 
 const styles = StyleSheet.create({

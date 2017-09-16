@@ -24,31 +24,31 @@ export default class Login extends Component {
     this.props.navigator.push({ id });
   }
 
-   validateEmail = (email) => {
+  validateEmail = (email) => {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(email);
+    return re.test(email);
   };
 
-  validatePassword(password){
-    if(password.length > 8){return true}
-    else{return false}
+  validatePassword(password) {
+    if (password.length > 8) { return true }
+    else { return false }
   }
 
   handleFormSubmit() {
     try {
-      if(this.state.email == 'cuatroBabys@malumita.com') {
-         const cuatro = new Sound('cuatrobabys.mp3', Sound.MAIN_BUNDLE, (error) => {
-            if(error) {
-              console.log('soy el error');
-              return;
-            }
-            cuatro.play();
-            cuatro.setVolume(1);
-          });
+      if (this.state.email == 'cuatroBabys@malumita.com') {
+        const cuatro = new Sound('cuatrobabys.mp3', Sound.MAIN_BUNDLE, (error) => {
+          if (error) {
+            console.log('soy el error');
+            return;
+          }
+          cuatro.play();
+          cuatro.setVolume(1);
+        });
       } else {
-        if(this.validateEmail(this.state.email)) {
+        if (this.validateEmail(this.state.email)) {
           Database.loginUser(this.state.email, this.state.password).then(res => {
-            if(res) this.navigate('Home');
+            if (res) this.navigate('Home');
           });
         }
         else {
@@ -56,13 +56,13 @@ export default class Login extends Component {
         }
       }
     }
-    catch(error) {
-        console.log('Error: ', error);
-      }
+    catch (error) {
+      console.error('Error: ', error);
+    }
   }
 
   render() {
-    return(
+    return (
       <View style={styles.formContainer}>
         <Image
           source={require('../../resources/logo.png')}
@@ -81,7 +81,7 @@ export default class Login extends Component {
           secure={true}
         />
         <Button onpress={() => this.handleFormSubmit()} text='LOGIN' />
-        <Button onpress={() => this.navigate('Register')} text='REGISTER'/>
+        <Button onpress={() => this.navigate('Register')} text='REGISTER' />
       </View>
     )
   }

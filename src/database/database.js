@@ -20,7 +20,6 @@ export default class Database {
             raters: 0
           });
         });
-      console.log('Success');
     } catch (error) {
       console.error(error);
     }
@@ -121,13 +120,15 @@ export default class Database {
       refUsers.child('rate').set(avg);
 
     });
-}
+  }
 
   static getPost(postId) {
     return firebase.database().ref('posts/' + postId);
   }
 
-  static async subscribeToPost(username, email, userUID, postKey, postAuthorUid) {
+  static async subscribeToPost(
+    username, email,
+    userUID, postKey, postAuthorUid) {
     var userData = {
       userName: username,
       email: email
@@ -139,14 +140,15 @@ export default class Database {
     };
     var updates = {};
     updates['posts/' + postKey + '/subscribedUsers/' + userUID] = userData;
-    updates['user-posts/' + postAuthorUid + '/' + postKey + '/subscribedUsers/' + userUID] = userData;
+    updates['user-posts/' + postAuthorUid + '/'
+      + postKey + '/subscribedUsers/' + userUID] = userData;
     updates['orders/' + userUID + '/' + postKey] = review;
     firebase.database().ref().update(updates);
 
     let response = await fetch('https://backgurbia.herokuapp.com/addLiked', {
       headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
       },
       method: 'POST',
       body: JSON.stringify({
@@ -154,7 +156,7 @@ export default class Database {
         userID: userUID
       })
     }).catch(err => {
-      console.log(err);
+      console.error(err);
     });
   }
 
@@ -188,8 +190,6 @@ export default class Database {
               .once('value').then(data => { return data.val() })
             postArr.push(a)
           }
-          console.log("ESTE ES EL MENSAJITO CON LOS POST ARRAY ")
-          console.log(postArr)
           resolve(postArr);
         }).catch(error => {
           reject(error);
@@ -208,6 +208,28 @@ export default class Database {
           reject(error);
         })
     })
+  }
+
+  static async getRecommendedPosts() {
+    let userUID = firebase.auth().currentUser.uid;
+    let response =
+      await fetch('https://backgurbia.herokuapp.com/getRecommendations', {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify({
+          recs: 5,
+          userID: userUID
+        })
+      })
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => {
+          console.error(err);
+        });
   }
 
   static getUser() {

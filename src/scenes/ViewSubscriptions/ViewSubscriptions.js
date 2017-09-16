@@ -27,8 +27,8 @@ export default class PostView extends Component {
 
   componentWillMount() {
     if (this.props.data.subscribedUsers != undefined) {
-      this.setState({ 
-        subs: this.props.data.subscribedUsers 
+      this.setState({
+        subs: this.props.data.subscribedUsers
       });
     } else {
       this.setState({
@@ -39,7 +39,7 @@ export default class PostView extends Component {
 
   formatData() {
     let subData = [];
-    for(var i in this.state.subs){
+    for (var i in this.state.subs) {
       subData.push({
         key: i,
         data: this.state.subs[i]
@@ -51,17 +51,16 @@ export default class PostView extends Component {
   render() {
     const subs = this.formatData();
 
-    console.log(subs);
-
-    const subsComponents = subs.map( data => {
+    const subsComponents = subs.map(data => {
       return (
         <Subscriptor
           key={data.key}
           info={{ ...data.data }}
         />
-      )});
+      )
+    });
 
-    return(
+    return (
       <View style={styles.container}>
         <Navbar
           onpressnav={() => _navigator.pop()}

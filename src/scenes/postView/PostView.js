@@ -34,10 +34,10 @@ export default class PostView extends Component {
 
   render() {
     const pedidos = (this.props.data.subscribedUsers == undefined) ?
-                        0 :
-                        Object.keys(this.props.data.subscribedUsers).length;
-    console.log(this.props.data);                        
-    return(
+      0 :
+      Object.keys(this.props.data.subscribedUsers).length;
+
+    return (
       <View style={styles.container}>
         <Navbar
           onpressnav={() => _navigator.pop()}
@@ -45,7 +45,7 @@ export default class PostView extends Component {
         />
         <View style={styles.imageContainer}>
           <Image
-            source={{uri:this.props.data.picture}}
+            source={{ uri: this.props.data.picture }}
             style={styles.postImage}
           />
         </View>
@@ -62,17 +62,17 @@ export default class PostView extends Component {
                 rating={this.props.data.rate}
                 starColor={'#D32F2F'}
                 emptyStarColor={'#f2828a'}
-                starSize= {30}
+                starSize={30}
               />
             </View>
           </View>
           <View style={styles.foodInfoContainer}>
             <View style={styles.pricingContainer}>
               <Text style={styles.priceText}>
-                <Text style={{fontWeight: 'bold'}}>Price:</Text> {this.props.data.price}
+                <Text style={{ fontWeight: 'bold' }}>Price:</Text> {this.props.data.price}
               </Text>
               <Text style={styles.priceText}>
-                <Text style={{fontWeight: 'bold'}}>Portions:</Text>
+                <Text style={{ fontWeight: 'bold' }}>Portions:</Text>
                 {pedidos}/{this.props.data.portions}</Text>
             </View>
             <Text style={styles.foodDescription}>
@@ -86,8 +86,8 @@ export default class PostView extends Component {
             'Confirmacion de pedido',
             'Estas seguro que quieres suscribirse a esta publicacion?',
             [
-              {text: 'No, gracias', onPress: () => console.log("Canceladei")},
-              {text: 'Suscribirme!', onPress: () => this.handleFormSubmit()},
+              { text: 'No, gracias', onPress: () => console.log("Canceladei") },
+              { text: 'Suscribirme!', onPress: () => this.handleFormSubmit() },
             ],
             { cancelable: false }
           )}
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontStyle: 'italic'
   },
-  rateContainer:{
+  rateContainer: {
     alignSelf: 'center'
   },
   foodInfoContainer: {
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     padding: 5
   },
-  priceText:{
+  priceText: {
     fontSize: 15,
   },
 })

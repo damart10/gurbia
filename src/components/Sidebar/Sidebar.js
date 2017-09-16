@@ -24,6 +24,10 @@ const data = [
   {
     key: 'Orders',
     text: 'My orders'
+  },
+  {
+    key: 'Recommendations',
+    text: 'Recommendations'
   }
 ]
 
@@ -36,8 +40,8 @@ export default class Sidebar extends Component {
     this.props.navigator.push({ id });
   }
 
-  render () {
-    const buttons = data.map( data => {
+  render() {
+    const buttons = data.map(data => {
       return (
         <TouchableOpacity
           style={styles.button}

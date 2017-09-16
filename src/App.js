@@ -15,6 +15,7 @@ import UserPost from './scenes/UserPost/UserPost'
 import Orders from './scenes/Orders/Orders'
 import ViewSubscriptions from './scenes/ViewSubscriptions/ViewSubscriptions'
 import UpdateProfile from './scenes/updateProfile/UpdateProfile'
+import Recommendations from './scenes/recommendations/Recommendations'
 
 export default class App extends Component {
   constructor(props) {
@@ -55,6 +56,8 @@ export default class App extends Component {
         return (<ViewSubscriptions navigator={_navigator} data={route.data} />);
       case 'UpdateProfile':
         return (<UpdateProfile navigator={_navigator} />);
+      case 'Recommendations':
+        return (<Recommendations navigator={_navigator} />);
       default:
         return (<Text>SOMETHING WENT WRONG ${route}</Text>);
     }

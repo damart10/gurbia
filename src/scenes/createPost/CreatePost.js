@@ -24,20 +24,20 @@ export default class CreatePost extends Component {
     super(props)
     this.navigate = this.navigate.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
-    this.state = {imagePath: ''}
+    this.state = { imagePath: '' }
   }
 
 
-  componentWillMount(){
-    this.setState({imagePath: 'http://thugify.com/wp-content/uploads/2016/08/placeholder.jpg'})
+  componentWillMount() {
+    this.setState({ imagePath: 'http://thugify.com/wp-content/uploads/2016/08/placeholder.jpg' })
   }
   navigate(id) {
     this.props.navigator.push({ id });
   }
 
   handleFormSubmit() {
-  try {
-      if(this.state.imagePath != 'http://thugify.com/wp-content/uploads/2016/08/placeholder.jpg'){
+    try {
+      if (this.state.imagePath != 'http://thugify.com/wp-content/uploads/2016/08/placeholder.jpg') {
         Database.writePost(
           this.state.imagePath,
           this.state.title,
@@ -51,36 +51,34 @@ export default class CreatePost extends Component {
         alert('Por favor adjunte una imagen')
       }
 
-    } catch(error) {
-      console.log('Error: ', error);
+    } catch (error) {
+      console.error('Error: ', error);
     }
   }
 
-  openImage(){
-      ImagePicker.openPicker({
-        width: 200,
-        height: 200,
-        cropping: true
-      }).then(image => {
-        console.log(image.path);
-        this.setState({ imagePath: image.path })
-        console.log(this.state);
-      }).catch(function (e) {
-        console.log('El usuario no eligio foto',e)
-      });
-    }
+  openImage() {
+    ImagePicker.openPicker({
+      width: 200,
+      height: 200,
+      cropping: true
+    }).then(image => {
+      this.setState({ imagePath: image.path })
+    }).catch(function (e) {
+      console.log('El usuario no eligio foto', e)
+    });
+  }
 
-    validateField(field){
-      if(field.length > 0){return true}
-      else{return false}
-    }
+  validateField(field) {
+    if (field.length > 0) { return true }
+    else { return false }
+  }
 
 
   render() {
-    return(
+    return (
       <View style={styles.createContainer}>
         <Navbar
-          onpressnav={() => { _navigator.pop()}}
+          onpressnav={() => { _navigator.pop() }}
           type=''
         />
         <KeyboardAvoidingView
@@ -89,7 +87,7 @@ export default class CreatePost extends Component {
           <View style={styles.imageContainer}>
             <Image
               style={styles.image}
-              source={{uri:this.state.imagePath}}
+              source={{ uri: this.state.imagePath }}
             />
             <ActionButton
               buttonColor='rgba(255, 87, 34, 1)'
@@ -112,7 +110,7 @@ export default class CreatePost extends Component {
               placeholder='DESCRIPTION'
               multiline={true}
               maxLength={140}
-              numberOfLines = {4}
+              numberOfLines={4}
               placeholderTextColor="rgba(117, 117, 117, 0.8)"
             />
             <InputText
@@ -148,7 +146,7 @@ export default class CreatePost extends Component {
 }
 
 const styles = StyleSheet.create({
-  createContainer:{
+  createContainer: {
     backgroundColor: '#FFF',
     flex: 1,
   },
@@ -161,7 +159,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 30
   },
-  imageContainer:{
+  imageContainer: {
     backgroundColor: '#CDCDCD'
   },
   image: {
