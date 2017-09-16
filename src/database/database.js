@@ -143,7 +143,7 @@ export default class Database {
     updates['orders/' + userUID + '/' + postKey] = review;
     firebase.database().ref().update(updates);
 
-    fetch('https://backgurbia.herokuapp.com/', {
+    fetch('https://backgurbia.herokuapp.com/addLiked', {
       method: 'POST',
       body: JSON.stringify({
         userID: userUID,
