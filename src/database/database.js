@@ -127,7 +127,7 @@ export default class Database {
     return firebase.database().ref('posts/' + postId);
   }
 
-  static subscribeToPost(username, email, userUID, postKey, postAuthorUid) {
+  static async subscribeToPost(username, email, userUID, postKey, postAuthorUid) {
     var userData = {
       userName: username,
       email: email
@@ -143,23 +143,21 @@ export default class Database {
     updates['orders/' + userUID + '/' + postKey] = review;
     firebase.database().ref().update(updates);
 
-
-    var payload = {
-      postID: postKey,
-      userID: userUID
-    }; 
-
-    var data = new FormData();
-    data.append('json', JSON.stringify(payload));
     let response = await fetch('https://backgurbia.herokuapp.com/addLiked', {
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+      },
       method: 'POST',
-      body: data
+      body: JSON.stringify({
+        postID: postKey,
+        userID: userUID
+      })
+    }).catch(err => {
+      console.log(err);
     });
-    let responseJson = await response.json();
-    console.log(responseJson);
   }
 
-  static getRecommendations
 
   static getPosts() {
     var posts = [];
