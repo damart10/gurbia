@@ -143,17 +143,20 @@ export default class Database {
     updates['orders/' + userUID + '/' + postKey] = review;
     firebase.database().ref().update(updates);
 
-    fetch('https://backgurbia.herokuapp.com/addLiked', {
+
+    var payload = {
+      postID: postKey,
+      userID: userUID
+    }; 
+
+    var data = new FormData();
+    data.append('json', JSON.stringify(payload));
+    let response = await fetch('https://backgurbia.herokuapp.com/addLiked', {
       method: 'POST',
-      body: JSON.stringify({
-        userID: userUID,
-        postID: postKey
-      })
-    })
-    .then((response) => response.json())
-    .then((responeJson) => {
-      console.log(responeJson);
-    })
+      body: data
+    });
+    let responseJson = await response.json();
+    console.log(responseJson);
   }
 
   static getRecommendations
