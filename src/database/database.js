@@ -145,10 +145,10 @@ export default class Database {
 
     fetch('https://backgurbia.herokuapp.com/addLiked', {
       method: 'POST',
-      body: {
+      body: JSON.stringify({
         userID: userUID,
         postID: postKey
-      }
+      })
     })
     .then((response) => response.json())
     .then((responeJson) => {
