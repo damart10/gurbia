@@ -75,20 +75,27 @@ export default class Recommendations extends Component {
     });
 
     return (
-      <View style={styles.container}>
-        <Navbar
-          onpressnav={() => _navigator.pop()}
-          //onpressearch={() => this.navigate('UpdateProfile')}
-          type=''
-        />
-        <ScrollView style={styles.postsList}>
-          <Text>HOLITA</Text>
-        </ScrollView>
-        <ActionButton
-          buttonColor='rgba(255, 87, 34, 1)'
-          onPress={() => this.navigate('CreatePost')}
-        />
-      </View>
+      <Drawer
+        type='overlay'
+        ref={(ref) => this._drawer = ref}
+        tapToClose={true}
+        openDrawerOffset={0.3}
+        content={<Sidebar navigator={this.props.navigator} />}
+      >
+        <View style={styles.container}>
+          <Navbar
+            onpressnav={() => openDrawer()}
+            type='Home'
+          />
+          <ScrollView style={styles.postsList}>
+            {postsComponents}
+          </ScrollView>
+          <ActionButton
+            buttonColor='rgba(255, 87, 34, 1)'
+            onPress={() => this.navigate('CreatePost')}
+          />
+        </View>
+      </Drawer>
     )
   }
 }
@@ -111,3 +118,4 @@ BackAndroid.addEventListener('hardwareBackPress', () => {
   _navigator.pop();
   return true;
 });
+

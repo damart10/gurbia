@@ -220,7 +220,7 @@ export default class Database {
         },
         method: 'POST',
         body: JSON.stringify({
-          recs: 5,
+          recs: 1,
           userID: userUID
         })
       })
