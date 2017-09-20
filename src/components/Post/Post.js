@@ -27,7 +27,6 @@ export default class Post extends Component {
 
   componentWillMount() {
     this.getRate().then((data) => {
-      console.log(data);
       this.setState({
         starCount: parseInt(data.rate)
       })
@@ -40,18 +39,18 @@ export default class Post extends Component {
   }
 
   render() {
-    return(
+    return (
       <TouchableOpacity
         style={styles.postContainer}
         activeOpacity={0.8}
-        onPress={() => this.navigate({ 
-          id: 'PostView', 
+        onPress={() => this.navigate({
+          id: 'PostView',
           data: { ...this.props.info, rate: this.state.starCount }
         })}
       >
         <View style={styles.imageContainer}>
           <Image
-            source={{uri:this.props.info.picture}}
+            source={{ uri: this.props.info.picture }}
             style={styles.postImage}
           />
         </View>
@@ -68,7 +67,7 @@ export default class Post extends Component {
                 rating={this.state.starCount}
                 starColor={'#D32F2F'}
                 emptyStarColor={'#f2828a'}
-                starSize= {30}
+                starSize={30}
               />
             </View>
           </View>
@@ -119,7 +118,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontStyle: 'italic'
   },
-  rateContainer:{
+  rateContainer: {
     alignSelf: 'center'
   },
   foodInfoContainer: {

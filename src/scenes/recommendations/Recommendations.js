@@ -33,6 +33,8 @@ export default class Recommendations extends Component {
         data: data
       })
     });
+
+    console.log(this.state);
   }
 
   navigate(id) {

@@ -29,13 +29,12 @@ export default class Post extends Component {
     this.setState({
       starCount: rating
     });
-    console.log(this.props.info.key)
     Alert.alert(
       'Confirmacion de calificacion',
       'Quieres dejar una calificacion de ' + rating + ' a esta publicacion?',
       [
-        {text: 'Cancelar', onPress: () => console.log("Canceladei")},
-        {text: 'Seguro!', onPress: () => Database.reviewPost(this.props.info.uid,rating) },
+        { text: 'Cancelar', onPress: () => console.log("Canceladei") },
+        { text: 'Seguro!', onPress: () => Database.reviewPost(this.props.info.uid, rating) },
       ],
       { cancelable: false }
     )
@@ -43,13 +42,13 @@ export default class Post extends Component {
 
 
   render() {
-    return(
+    return (
       <View
         style={styles.postContainer}
       >
         <View style={styles.imageContainer}>
           <Image
-            source={{uri:this.props.info.picture}}
+            source={{ uri: this.props.info.picture }}
             style={styles.postImage}
           />
         </View>
@@ -66,7 +65,7 @@ export default class Post extends Component {
                 rating={this.state.starCount}
                 starColor={'#D32F2F'}
                 emptyStarColor={'#f2828a'}
-                starSize= {30}
+                starSize={30}
                 selectedStar={(rating) => this.onStarRatingPress(rating)}
               />
             </View>
@@ -118,7 +117,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontStyle: 'italic'
   },
-  rateContainer:{
+  rateContainer: {
     alignSelf: 'center'
   },
   foodInfoContainer: {

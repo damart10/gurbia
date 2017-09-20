@@ -197,6 +197,24 @@ export default class Database {
     })
   }
 
+  static async getPostsByKeys(keys) {
+    var posts = [];
+    console.log(keys);
+    for (var i in keys) {
+      console.log(keys[i])
+      var post = await this.getPost(keys[i])
+        .once('value').then(data => {
+          console.log(data.val());
+          return data.val();
+        })
+        .catch(err => {
+          console.error(err);
+        });
+      posts.push(post);
+    }
+    return posts;
+  }
+
   static getUserPosts() {
     var posts = [];
     var user = firebase.auth().currentUser;
@@ -210,9 +228,9 @@ export default class Database {
     })
   }
 
-  static async getRecommendedPosts() {
+  static getRecommendedPosts() {
     let userUID = firebase.auth().currentUser.uid;
-    let response =
+    return new Promise(async (resolve, reject) => {
       await fetch('https://backgurbia.herokuapp.com/getRecommendations', {
         headers: {
           'Accept': 'application/json',
@@ -225,11 +243,13 @@ export default class Database {
         })
       })
         .then(res => {
-          console.log(res);
+          let posts = this.getPostsByKeys(JSON.parse(res._bodyText));
+          resolve(posts)
         })
         .catch(err => {
-          console.error(err);
+          reject(err)
         });
+    })
   }
 
   static getUser() {

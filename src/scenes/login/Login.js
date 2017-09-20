@@ -39,7 +39,7 @@ export default class Login extends Component {
       if (this.state.email == 'cuatroBabys@malumita.com') {
         const cuatro = new Sound('cuatrobabys.mp3', Sound.MAIN_BUNDLE, (error) => {
           if (error) {
-            console.log('soy el error');
+            console.error('Error en el easteregg: ', error);
             return;
           }
           cuatro.play();

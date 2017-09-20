@@ -22,18 +22,18 @@ export default class Register extends Component {
 
   validateEmail = (email) => {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(email);
+    return re.test(email);
   };
 
-  validatePassword(password){
-    if(password.length > 7){return true}
-    else{return false}
+  validatePassword(password) {
+    if (password.length > 7) { return true }
+    else { return false }
   }
 
   handleFormSubmit() {
     try {
-      if(this.validateEmail(this.state.email)){
-        if(this.validatePassword(this.state.password)){
+      if (this.validateEmail(this.state.email)) {
+        if (this.validatePassword(this.state.password)) {
           Database.createUser(
             this.state.firstname,
             this.state.lastname,
@@ -42,45 +42,45 @@ export default class Register extends Component {
           );
           this.navigate('Login');
         }
-        else{
+        else {
           alert('La contraseña debe tener minimo 8 caracteres')
         }
       }
-      else{
+      else {
         alert('Malformed email');
       }
-  }catch(error) {
-      console.log('Error: ', error);
+    } catch (error) {
+      console.log('Error creando usuario: ', error);
     }
   }
 
   render() {
-    return(
+    return (
       <View style={styles.formContainer}>
         <InputText
-          onchange = {(firstname) => this.setState({ firstname })}
+          onchange={(firstname) => this.setState({ firstname })}
           type='default'
           placeholder='FIRSTNAME'
           secure={false}
-          />
+        />
         <InputText
-          onchange = {(lastname) => this.setState({ lastname })}
+          onchange={(lastname) => this.setState({ lastname })}
           type='default'
           placeholder='LASTNAME'
           secure={false}
-          />
+        />
         <InputText
-          onchange = {(email) => this.setState({ email })}
+          onchange={(email) => this.setState({ email })}
           type='default'
           placeholder='EMAIL'
           secure={false}
-          />
+        />
         <InputText
-          onchange = {(password) => this.setState({ password })}
+          onchange={(password) => this.setState({ password })}
           type='default'
           placeholder='PASSWORD'
           secure={true}
-          />
+        />
         <Button onpress={() => this.handleFormSubmit()} text='REGISTER' />
       </View>
     )
